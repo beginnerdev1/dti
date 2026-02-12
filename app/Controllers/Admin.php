@@ -2,20 +2,30 @@
 
 namespace App\Controllers;
 
+use App\Models\UsersModel;
+
 class Admin extends BaseController
 {
+    protected $usersModel;
+
+    public function __construct()
+    {
+        $this->usersModel = new UsersModel();
+    }
+
     public function login()
     {
         return view('admin/login');
     }
 
+    // Handle login form submission
     public function authenticate()
     {
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // Database authentication
-        $user = $this->db->table('users')->where('username', $username)->where('is_active', 1)->get()->getRowArray();
+        // Get user from database
+        $user = $this->usersModel->where('username', $username)->where('is_active', 1)->first();
 
         if ($user && password_verify($password, $user['password'])) {
             session()->set([
@@ -29,6 +39,7 @@ class Admin extends BaseController
         }
     }
 
+    //handle if the user is logged in or not
     public function dashboard()
     {
         if (!session()->get('admin_logged_in')) {

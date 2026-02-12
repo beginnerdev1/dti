@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=IBM+Plex+Sans:wght@300;400;600;700&display=swap');
+
+:root{
+  --primary:#09203f;
+  --accent:#09203f;
+  --muted:#6c757d;
+  --bg:#f6f7fb;
+  --card-shadow: 0 8px 22px rgba(29,41,61,0.06);
+  --space-xs:6px;
+  --space-sm:10px;
+  --space-md:16px;
+  --space-lg:24px;
+  --space-xl:36px;
+}
+
+*{box-sizing:border-box}
+body{
+  font-family: 'Inter', 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-size:16px;
+  line-height:1.65;
+  background: linear-gradient(180deg,#f8fafc 0%, var(--bg) 100%);
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.site-header{
+  background:var(--primary);
+  color:#fff;
+  padding:calc(var(--space-lg) + 12px) var(--space-lg);
+  box-shadow:0 6px 20px rgba(9,32,63,0.08);
+  border-radius:0;
+  margin:0;
+  width:100%;
+  position:sticky;
+  top:0;
+  left:0;
+  z-index:50;
+}
+
+/* DTI logo inside header: larger with white tile */
+.site-header .site-logo{
+  width:72px;
+  height:72px;
+  object-fit:contain;
+  border-radius:8px;
+  background:#ffffff;
+  padding:8px;
+  display:inline-block;
+  box-shadow:0 6px 18px rgba(2,6,23,0.12);
+  border:1px solid rgba(15,23,42,0.04);
+}
+
+@media (max-width:576px){
+  .site-header .site-logo{width:56px;height:56px;padding:6px}
+}
+.site-header h4{font-weight:700;margin:0;font-size:1.5rem;letter-spacing:0.2px}
+
+.site-header .header-sub{font-size:0.95rem;color:rgba(255,255,255,0.9);margin-top:4px;font-weight:400}
+
+.product-card, .sidebar-card{
+  background:#fff;
+  border-radius:12px;
+  padding:var(--space-lg);
+  margin:0 0 20px 0;
+  box-shadow:var(--card-shadow);
+}
+
+/* Make center product card slightly smaller/tighter */
+.product-card{
+  padding:var(--space-md);
+  width:100%;
+  height:calc(100vh - 160px);
+  margin:0;
+}
+.product-card .fw-bold{font-size:0.98rem}
+.product-card .small{font-size:0.88rem}
+
+/* default chart height, enlarged for better visibility */
+/* Chart sizing: container controls height; canvas fills it to avoid stretching */
+#priceChart{width:100%;height:100%;display:block}
+
+.chart-container{height:320px}
+
+@media (max-width:992px){
+  .product-card{padding:var(--space-sm)}
+  .chart-container{height:220px}
+}
+
+@media (max-width:768px){
+  .product-card{max-width:100%;margin-left:0;margin-right:0}
+}
+
+/* larger left product card (product-card1) */
+.product-card1{
+  background:#fff;
+  border-radius:12px;
+  padding:calc(var(--space-lg) + 12px);
+  margin:0;
+  width:100%;
+  box-shadow:var(--card-shadow);
+  height:calc(100vh - 160px);
+  display:flex;
+  flex-direction:column;
+}
+
+@media (max-width: 992px){
+  .product-card1{min-height:auto;padding:var(--space-md)}
+}
+
+.product-card > * + *{margin-top:var(--space-md)}
+
+.product-card .fw-bold{font-size:1.02rem}
+.price-badge{font-weight:700;color:var(--accent);font-size:1.02rem}
+
+#productList > div.mb-3{padding:14px;border-radius:10px;border:2px solid rgba(9,32,63,0.08);transition:transform .14s cubic-bezier(.2,.9,.3,1),box-shadow .14s ease,background .14s ease;background:#fff}
+#productList > div.mb-3:hover{transform:translateY(-6px);box-shadow:0 22px 54px rgba(9,32,63,0.12);background:linear-gradient(180deg,rgba(9,32,63,0.02),#fff);border-color:rgba(9,32,63,0.12)}
+
+#latestPrices .sidebar-card{display:flex;align-items:center;justify-content:space-between;border:1px solid #f1f3f5;cursor:pointer;padding:12px}
+#latestPrices .sidebar-card:hover{background:linear-gradient(90deg,rgba(9,32,63,0.035),rgba(9,32,63,0.01))}
+
+#searchBox{border-radius:999px;padding:8px 14px;box-shadow:0 4px 12px rgba(33,37,41,0.04);border:1px solid rgba(15,23,42,0.06);background:#fff;max-width:100%}
+/* Enhanced search box: larger, prominent on page and clear focus state */
+.input-group{transition:all .18s ease}
+#searchBox{border-radius:999px;padding:10px 16px;box-shadow:0 8px 28px rgba(9,32,63,0.06);border:1px solid rgba(15,23,42,0.08);background:linear-gradient(180deg,#fff,#fbfdff);font-size:1rem}
+#searchBox::placeholder{color:rgba(15,23,42,0.45)}
+#searchBox:focus{box-shadow:0 14px 40px rgba(9,32,63,0.12);border-color:var(--primary)}
+
+.input-group .input-group-text{border:0;padding-left:6px;padding-right:8px;background:transparent}
+.input-group .form-control{border:0;padding-left:0}
+.input-group .btn{border-radius:999px}
+
+/* small tweak when header is sticky: give a little gap */
+body > .container.mt-3{margin-top:12px}
+.category-select{min-width:200px;border-radius:8px;padding:8px}
+
+#priceChart{background:transparent;border-radius:8px}
+
+.btn-outline-primary{border-radius:999px;padding:6px 12px}
+
+.small.text-muted{color:var(--muted);font-size:0.92rem}
+
+/* Simple grid utilities (Tailwind-like names) */
+.grid{display:grid}
+.grid-cols-1{grid-template-columns:repeat(1,1fr)}
+.gap-4{gap:1rem}
+
+/* responsive 12-column layout at large screens */
+@media (min-width: 992px){
+  .lg\:grid-cols-12{grid-template-columns:repeat(12,1fr)}
+  .lg\:col-span-4{grid-column:span 4 / span 4}
+  .lg\:col-span-5{grid-column:span 5 / span 5}
+  .lg\:col-span-6{grid-column:span 6 / span 6}
+  .lg\:col-span-7{grid-column:span 7 / span 7}
+  .lg\:col-span-8{grid-column:span 8 / span 8}
+}
+
+/* utility for column spans on all sizes if needed */
+.col-span-12{grid-column:span 12}
+
+/* responsive tweaks */
+@media (max-width: 992px){
+  .site-header .container{flex-direction:column;gap:10px;align-items:flex-start}
+  .category-select{min-width:100%}
+  #priceChart{height:200px!important}
+  .product-card, .sidebar-card{padding:var(--space-md)}
+}
+
+@media (max-width:576px){
+  .site-header h4{font-size:1.125rem}
+}
+
+@media (max-width:576px){
+  .site-header .header-sub{font-size:0.85rem}
+}
+
+/* header nav styling */
+.site-header .nav{gap:16px}
+.site-header .nav-link{color:#fff;padding:.25rem .5rem;font-size:1.125rem;font-weight:600;border-radius:6px}
+.site-header .nav-link:hover{color:#fff;opacity:.95;text-decoration:none}
+.site-header .nav-link.active{background:rgba(255,255,255,0.08);color:#fff}
+
+@media (max-width:576px){
+  .site-header .nav-link{font-size:0.95rem}
+}
+
+/* subtle focus states */
+input:focus, select:focus, button:focus{outline: none; box-shadow: 0 6px 18px rgba(9,32,63,0.08)}
+
+/* subtle utilities */
+.muted{color:var(--muted)}
+.lead{color:#374151;font-size:0.98rem}
+
+/* Additional styles to match the product-list / sidebar layout */
+.best-price-list{list-style:none;padding:0;margin:0}
+.best-price-item{display:flex;justify-content:space-between;align-items:center;background:#fafafa;border-radius:8px;padding:8px 10px;margin-bottom:8px;border:1px solid #f1f3f5}
+.best-price-item .pin{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:#eef2ff;color:var(--accent);margin-right:8px;font-size:12px}
+.best-price-item .loc{font-size:0.92rem;color:#334155;display:flex;align-items:center}
+.best-price-item .loc{font-size:0.92rem;color:#334155}
+.best-price-item .amt{font-weight:700;color:var(--primary)}
+.view-button{border-radius:10px;padding:.35rem .75rem}
+.tag-badge{display:inline-block;background:var(--accent);color:#fff;padding:6px 10px;border-radius:999px;font-size:0.82rem}
+
+/* Selected product list item highlight */
+#productList > div.mb-3.selected{background:linear-gradient(180deg,rgba(9,32,63,0.03),#fff);box-shadow:0 28px 60px rgba(9,32,63,0.08);transform:translateY(-4px);border-color:rgba(9,32,63,0.14)}
+
+/* small category badge used in product cards (upper-right) */
+.tag-badge-sm{display:inline-block;background:var(--primary);color:#fff;padding:6px 8px;border-radius:999px;font-size:0.78rem}
+.category-top{margin-bottom:6px}
+
+/* hide category badges everywhere except the modal-specific badge */
+.tag-badge, .tag-badge-sm, .category-top { display: none !important }
+
+/* floating badge inside modal + colored header */
+.modal-card{position:relative;overflow:hidden;border-radius:12px}
+.modal-card .modal-badge{position:absolute;top:34px;right:84px;z-index:50;display:block}
+.modal-card .modal-badge .tag-badge-sm{font-size:1.05rem;padding:8px 14px;background:#ffffff;color:#000;border-radius:12px;box-shadow:0 14px 40px rgba(2,6,23,0.25);border:1px solid rgba(2,6,23,0.06);display:inline-block !important;font-weight:700;text-transform:uppercase}
+
+/* small logo inside modal-card (top-left) */
+.modal-card .modal-logo{position:absolute;top:28px;left:24px;z-index:45;display:block}
+.modal-card .modal-logo img{width:95px;height:115px;object-fit:contain;border-radius:8px;background:#fff;padding:6px;box-shadow:0 8px 24px rgba(2,6,23,0.12);border:1px solid rgba(2,6,23,0.06)}
+
+/* Header styling inside modal to give a colored band */
+.modal-header{background:linear-gradient(90deg,var(--primary),#063048);padding:18px 22px;color:#fff;border-top-left-radius:12px;border-top-right-radius:12px;display:flex;align-items:flex-start;justify-content:space-between}
+.modal-header .h4{color:#fff;margin:0;font-weight:700}
+.modal-header .small{color:rgba(255,255,255,0.92);margin-top:6px}
+.modal-header .modal-header-content{margin-left:84px}
+.btn-close-modal{color:rgba(255,255,255,0.95)}
+.modal-body{padding:18px 22px}
+.modal-body .table{margin-bottom:0}
+.modal-body thead th{font-weight:700}
+
+/* Table header icons and column alignment inside modal */
+.modal-body thead th i{margin-right:8px;color:#334155;font-size:1.05rem;vertical-align:middle}
+.modal-body td.price-column, .modal-body th.price-column{ text-align:center; white-space:nowrap }
+.modal-body td.date-column, .modal-body th.date-column{ text-align:center }
+.modal-body tbody td{vertical-align:middle}
+.modal-body .table thead th{background:transparent}
+.modal-body .table thead th.sticky{position:sticky;top:0;z-index:6;background:#fff}
+
+/* Store column: bold, slightly larger font, with left location icon */
+.modal-body .table td.store-column, .modal-body .table th.store-column{
+  font-weight:800;
+  font-size:1.04rem;
+}
+.modal-body .table td.store-column i, .modal-body .table th.store-column i{
+  font-size:1.18rem;
+  color:var(--muted);
+  vertical-align:middle;
+  margin-right:10px;
+}
+
+@media (max-width:768px){
+  .modal-header .modal-header-content{margin-left:64px}
+  .modal-card .modal-logo img{width:34px;height:34px;padding:5px}
+}
+
+/* Modal product name: larger and Title Case */
+#modalProductName{display:block;font-size:1.45rem;font-weight:800;color:#fff;margin-top:10px;text-transform:capitalize;letter-spacing:0.2px}
+
+/* Make left column scrollable when many products exist */
+.product-card1 #productList{flex:1;overflow:auto;padding-right:6px;padding-left:6px}
+
+/* remove horizontal page padding on full-width layout */
+main.container-fluid{padding-left:0;padding-right:0}
+
+/* tighter two-column layout to match screenshot */
+.lg\:col-span-6{padding-left:12px;padding-right:12px}
+.lg\:col-span-4{padding-left:12px;padding-right:12px}
+.left-panel{padding-left:18px;padding-right:12px}
+.right-panel{padding-left:12px;padding-right:18px}
+
+/* products header badge */
+.product-card1 > .d-flex > .badge{background:#081a33;color:#fff;border-radius:999px;padding:6px 10px;font-weight:700}
+
+/* larger inline product count badge used next to the Products label */
+.product-count-badge{display:inline-block;background:#081a33;color:#fff;border-radius:12px;padding:8px 12px;font-weight:800;font-size:1rem;line-height:1;vertical-align:middle}
+
+/* primary filled view button style like screenshot */
+.btn-primary-filled{background:#081a33;color:#fff;border:0;padding:8px 14px;border-radius:8px}
+.btn-primary-filled:hover{opacity:0.95}
+
+/* small shadow for center card to lift it */
+.product-card{box-shadow:0 20px 50px rgba(15,23,42,0.06);border-radius:12px}
+.product-card1 #productList > div.mb-3{display:block}
+
+/* Latest prices entries (right column) styling tweaks */
+#latestPrices .sidebar-card{flex-direction:row;align-items:flex-start;gap:12px;padding:14px;border-radius:10px}
+#latestPrices .sidebar-card .small.text-muted{font-size:0.85rem}
+
+@media (max-width:992px){
+  .product-card1{min-height:auto}
+  .product-card1 #productList{max-height:40vh}
+}
+
+/* larger chart on large screens to occupy more of the product-card */
+@media (min-width: 992px){
+  .chart-container{height:calc(100vh - 300px)}
+}
+
+/* Modal overlay and card */
+.modal-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1200;pointer-events:none;opacity:0;transition:opacity .18s ease}
+.modal-overlay.visible{pointer-events:auto;opacity:1;background:rgba(9,20,35,0.38);backdrop-filter:blur(10px)}
+.modal-card{width:50vw;max-width:1200px;height:86vh;overflow:auto;background:#ffffff;border-radius:12px;padding:20px;box-shadow:0 60px 160px rgba(2,6,23,0.32);border-left:10px solid var(--primary)}
+.modal-header .h5{font-weight:700}
+.btn-close-modal{background:transparent;border:0;font-size:20px;padding:6px 10px}
+.modal-body{padding-top:8px;padding-bottom:8px}
+.modal-footer{padding-top:8px}
+.modal-overlay .form-control{border-radius:8px;padding:10px;border:1px solid rgba(15,23,42,0.06)}
+
+/* prevent page scrolling when modal open */
+.modal-open{overflow:hidden}
+
+/* modal read-only field styling */
+.modal-field{background:#f8fafc;border-radius:8px;padding:10px;margin-top:6px;border:1px solid rgba(15,23,42,0.04)}
+
+/* Footer styles */
+.site-footer{background:linear-gradient(180deg,#071425 0%, #071a2b 60%); color:#fff;}
+.site-footer .footer-inner{border-bottom:1px solid rgba(255,255,255,0.04)}
+.site-footer h5{font-weight:700}
+.site-footer .footer-logo{height:46px;object-fit:contain;background:#fff;padding:6px;border-radius:6px}
+.site-footer .nav-link{color:rgba(255,255,255,0.9)}
+.site-footer .nav-link:hover{color:#fff}
+.site-footer .contact-list li{margin-bottom:8px}
+.site-footer .footer-bar{background:rgba(2,6,23,0.18);border-top:1px solid rgba(255,255,255,0.03)}
+.site-footer .footer-bar .powered img{height:18px}
+
+@media (max-width:767px){
+  .site-footer .footer-inner{padding-left:12px;padding-right:12px}
+  .site-footer .footer-logo{height:40px}
+}
+
+/* Footer with motto as subtle background */
+.site-footer{position:relative;background:linear-gradient(180deg,var(--primary),#063047);color:#fff;padding:40px 0;overflow:hidden}
+.site-footer{position:relative;background-image:linear-gradient(180deg,rgba(3,37,65,0.92),rgba(3,37,65,0.92)), url('images/495217219_122097815912868099_6770630181363149396_n.jpg');background-size:cover;background-position:center bottom;background-repeat:no-repeat;color:#fff;padding:48px 0 0;overflow:hidden}
+.site-footer::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.55),rgba(2,6,23,0.6));z-index:1}
+.site-footer .footer-inner{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:48px 24px 56px;display:flex;gap:30px;align-items:flex-start;justify-content:space-between}
+.site-footer .footer-col{flex:1;min-width:220px}
+.site-footer h5{color:#fff;margin-bottom:12px;font-weight:700}
+.site-footer p, .site-footer li, .site-footer a{color:rgba(255,255,255,0.88);font-size:0.95rem}
+.site-footer .contact-list{list-style:none;padding:0;margin:0}
+.site-footer .contact-list li{margin-bottom:10px;display:flex;align-items:center;gap:10px}
+.site-footer .gov-links{list-style:none;padding:0;margin:0}
+.site-footer .gov-links li{margin-bottom:8px}
+.site-footer .footer-logos{display:flex;gap:12px;align-items:center}
+
+.site-footer .footer-bar{margin-top:20px;background:#071433;padding:10px 20px;color:#cbd5e1}
+.site-footer .footer-bar .bar-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:6px 0}
+.site-footer .powered{display:flex;align-items:center;gap:8px}
+.site-footer .powered img{height:22px}
+
+@media(max-width:900px){
+  .site-footer .footer-inner{flex-direction:column;align-items:flex-start;padding:20px}
+  .site-footer .footer-col{width:100%}
+  .site-footer .footer-bar .bar-inner{flex-direction:column;gap:6px;align-items:flex-start}
+}

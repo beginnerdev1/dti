@@ -653,7 +653,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../index.php">
+                <a class="nav-link" href="<?= base_url('monitoring') ?>">
                 <i class="fa fa-chart-line"></i>
                 <span>Price Monitoring</span>
               </a>
