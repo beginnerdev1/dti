@@ -659,9 +659,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../price-comparison.php">
+              <a class="nav-link" href="<?= base_url('price-comparison') ?>">
                 <i class="fa fa-scale-balanced"></i>
                 <span>Price Comparison</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?= base_url('admin/logout') ?>" style="color: #ffcccc;">
+                <i class="fa fa-sign-out"></i>
+                <span>Logout</span>
               </a>
             </li>
           </ul>
@@ -672,29 +678,25 @@
 
   <!-- SIDEBAR -->
   <nav class="sidebar" aria-label="Admin dashboard navigation">
+    <br>
     <div class="sidebar-header">
       <h5><i class="fa fa-user-shield"></i> Admin Dashboard</h5>
     </div>
     <div class="sidebar-content">
-      <a href="#" class="active">
+      <a href="<?= base_url('admin/dashboard') ?>" class="active">
         <i class="fa fa-home"></i>
         <span>Dashboard</span>
       </a>
-      <a href="#">
+      <a href="<?= base_url('admin/products') ?>">
         <i class="fa fa-box"></i>
         <span>Products</span>
         <span class="sidebar-badge">128</span>
       </a>
      
-      <a href="#">
+      <a href="<?= base_url('admin/stores') ?>">
         <i class="fa fa-store"></i>
         <span>Establishments</span>
       </a> 
-      <a href="#">
-        <i class="fa fa-users"></i>
-        <span>Users</span>
-        <span class="sidebar-badge">1.2K</span>
-      </a>
       <a href="#">
        <i class="bi bi-graph-up-arrow"></i>
         <span>Reports</span>

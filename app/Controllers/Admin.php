@@ -48,4 +48,11 @@ class Admin extends BaseController
 
         return view('admin/dashboard');
     }
+
+    // Logout handler
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/admin/login')->with('success', 'Logged out successfully');
+    }
 }
