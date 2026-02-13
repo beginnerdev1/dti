@@ -1,10 +1,13 @@
 <!-- SIDEBAR (shared) -->
+ <br>
+ <br>
+
 <nav class="sidebar" aria-label="Admin dashboard navigation">
   <div class="sidebar-header">
     <h5><i class="fa fa-user-shield"></i> Admin Dashboard</h5>
   </div>
   <div class="sidebar-content">
-    <a href="#" class="active">
+      <a href="<?= base_url('admin/dashboard') ?>">
       <i class="fa fa-home"></i>
       <span>Dashboard</span>
     </a>
