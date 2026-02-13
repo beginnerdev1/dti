@@ -1,7 +1,6 @@
 <?= view('admin/head', ['title' => 'Admin Dashboard — DTI Aurora Price Monitoring']) ?>
   <?= view('admin/header') ?>
 
-<<<<<<< HEAD
   <?= view('admin/sidebar') ?>
 =======
     /* ================================================
@@ -685,7 +684,7 @@
       </a>
     </div>
   </nav>
->>>>>>> e098b3575a9b445b4936faaf5c6c23361b3d1354
+
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
