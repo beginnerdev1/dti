@@ -51,4 +51,34 @@ class Admin extends BaseController
 
         return view('admin/dashboard');
     }
+
+    public function productStoreManagement()
+    {
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
+        return view('admin/product-store-management');
+    }
+
+    public function saveProduct()
+    {
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'size' => $this->request->getPost('size'),
+            'category' => $this->request->getPost('category'),
+        ];
+
+        $insertId = $this->productModel->saveProduct($data);
+
+        if ($insertId) {
+            return redirect()->to('/admin/product-store-management')->with('success', 'Product added successfully');
+        } else {
+            return redirect()->to('/admin/product-store-management')->with('error', 'Failed to add product. Please check your input.');
+        }
+    }
 }
