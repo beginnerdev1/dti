@@ -22,6 +22,7 @@ $routes->get('api/price-comparison/products', 'PriceComparison::getProducts');
 $routes->get('admin', 'Admin::login');
 $routes->get('admin/login', 'Admin::login');
 $routes->post('admin/authenticate', 'Admin::authenticate');
+$routes->get('admin/logout', 'Admin::logout');
 $routes->get('admin/dashboard', 'Admin::dashboard');
 $routes->get('admin/product-store-management', 'Admin::productStoreManagement');
 $routes->post('admin/saveProduct', 'Admin::saveProduct');
