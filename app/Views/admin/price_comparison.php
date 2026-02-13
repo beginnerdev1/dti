@@ -46,7 +46,7 @@
   </header>
 
   <main class="container py-4">
-    <h2 class="mb-3">Price Comparison — Analytics</h2>
+    <h2 class="mb-3">Price Comparison — Analytics.</h2>
 
     <div class="analytics-wrap">
       <div class="left-analytics">
@@ -255,4 +255,4 @@
   </script>
 
 </body>
-</html>
+</html> 
