@@ -11,8 +11,6 @@ class ProductModel extends Model
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['name', 'category', 'size', 'created_at', 'updated_at'];
-    protected $useTimestamps = true;
-    protected $createdField = 'created_at';
-    protected $updatedField = 'updated_at';
+    protected $allowedFields = ['name', 'category', 'size', 'store_id'];
+    protected $useTimestamps = false;
 }

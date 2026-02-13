@@ -23,4 +23,5 @@ $routes->get('admin', 'Admin::login');
 $routes->get('admin/login', 'Admin::login');
 $routes->post('admin/authenticate', 'Admin::authenticate');
 $routes->get('admin/dashboard', 'Admin::dashboard');
-$routes ->get('admin/product-store-management', 'Admin::productStoreManagement');
+$routes->get('admin/product-store-management', 'Admin::productStoreManagement');
+$routes->post('admin/saveProduct', 'Admin::saveProduct');

@@ -4,14 +4,17 @@
 
 <main class="main-content">
   <div class="container-fluid">
+    <?php if(session()->getFlashdata('success')): ?>
+      <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
+    <?php endif ?>
+    <?php if(session()->getFlashdata('error')): ?>
+      <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
+    <?php endif ?>
+
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div>
         <h2 class="mb-0">Product & Store Management</h2>
         <small class="text-muted">Manage monitored products and stores</small>
-      </div>
-      <div>
-        <a href="<?= base_url('admin') ?>" class="btn btn-outline-secondary me-2"><i class="fa fa-arrow-left"></i> Back</a>
-        <a href="#addProduct" class="btn btn-primary" data-bs-toggle="modal">Add Product</a>
       </div>
     </div>
 
@@ -20,14 +23,15 @@
         <div class="card h-100">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title">Add Product</h5>
-            <form>
+            <form method="post" action="<?= site_url('admin/saveProduct') ?>">
+              <?= csrf_field() ?>
               <div class="mb-2">
                 <label class="form-label">Name</label>
-                <input class="form-control" placeholder="Product name">
+                <input name="name" class="form-control" placeholder="Product name" required>
               </div>
               <div class="row">
-                <div class="col-6 mb-2"><label class="form-label">Size</label><input class="form-control" placeholder="e.g., 1kg"></div>
-                <div class="col-6 mb-2"><label class="form-label">Category</label><input class="form-control" placeholder="Category"></div>
+                <div class="col-6 mb-2"><label class="form-label">Size</label><input name="size" class="form-control" placeholder="e.g., 1kg" required></div>
+                <div class="col-6 mb-2"><label class="form-label">Category</label><input name="category" class="form-control" placeholder="Category" required></div>
               </div>
               <div class="mt-auto d-flex justify-content-end">
                 <button class="btn btn-outline-secondary me-2" type="reset">Reset</button>
