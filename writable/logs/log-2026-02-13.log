@@ -58,3 +58,133 @@ in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
  8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
  9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-13 00:46:27 --> Table 'store' already exists
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('CREATE TABLE `store` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	`municipality` VARCHAR(255) NOT NULL,
+	`location` VARCHAR(255) NOT NULL,
+	CONSTRAINT `pk_store` PRIMARY KEY(`id`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('CREATE TABLE `store` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	`municipality` VARCHAR(255) NOT NULL,
+	`location` VARCHAR(255) NOT NULL,
+	CONSTRAINT `pk_store` PRIMARY KEY(`id`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('CREATE TABLE `store` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	`municipality` VARCHAR(255) NOT NULL,
+	`location` VARCHAR(255) NOT NULL,
+	CONSTRAINT `pk_store` PRIMARY KEY(`id`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 4 SYSTEMPATH\Database\Forge.php(570): CodeIgniter\Database\BaseConnection->query('CREATE TABLE `store` (
+	`id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) NOT NULL,
+	`municipality` VARCHAR(255) NOT NULL,
+	`location` VARCHAR(255) NOT NULL,
+	CONSTRAINT `pk_store` PRIMARY KEY(`id`)
+) DEFAULT CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci')
+ 5 APPPATH\Database\Migrations\2026-02-13-000437_CreateStoreTable.php(33): CodeIgniter\Database\Forge->createTable('store')
+ 6 SYSTEMPATH\Database\MigrationRunner.php(1014): App\Database\Migrations\CreateStoreTable->up()
+ 7 SYSTEMPATH\Database\MigrationRunner.php(202): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+ 8 SYSTEMPATH\Commands\Database\Migrate.php(89): CodeIgniter\Database\MigrationRunner->latest(null)
+ 9 SYSTEMPATH\CLI\SignalTrait.php(245): CodeIgniter\Commands\Database\Migrate::CodeIgniter\Commands\Database\{closure}()
+10 SYSTEMPATH\Commands\Database\Migrate.php(88): CodeIgniter\Commands\Database\Migrate->withSignalsBlocked(Object(Closure))
+11 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Migrate->run([])
+12 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('migrate', [])
+13 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+14 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+15 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+ERROR - 2026-02-13 02:07:53 --> Duplicate entry '1' for key 'PRIMARY'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `store` (`id`, `location`, `municipality`, `name`)
+VALUES (1,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'PureGold\'), (2,\'Brgy.Buhangin,Baler,Aurora\',\'Baler\',\'Novo\'), (3,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'N.E\'), (4,\'Brgy.Pingit,Baler,Aurora\',\'Baler\',\'Robinsons\'), (5,\'Brgy.4,Casiguran,Aurora\',\'CASIGURAN\',\'IKAS\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `store` (`id`, `location`, `municipality`, `name`)
+VALUES (1,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'PureGold\'), (2,\'Brgy.Buhangin,Baler,Aurora\',\'Baler\',\'Novo\'), (3,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'N.E\'), (4,\'Brgy.Pingit,Baler,Aurora\',\'Baler\',\'Robinsons\'), (5,\'Brgy.4,Casiguran,Aurora\',\'CASIGURAN\',\'IKAS\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `store` (`id`, `location`, `municipality`, `name`)
+VALUES (1,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'PureGold\'), (2,\'Brgy.Buhangin,Baler,Aurora\',\'Baler\',\'Novo\'), (3,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'N.E\'), (4,\'Brgy.Pingit,Baler,Aurora\',\'Baler\',\'Robinsons\'), (5,\'Brgy.4,Casiguran,Aurora\',\'CASIGURAN\',\'IKAS\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1841): CodeIgniter\Database\BaseConnection->query('INSERT INTO `store` (`id`, `location`, `municipality`, `name`)
+VALUES (1,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'PureGold\'), (2,\'Brgy.Buhangin,Baler,Aurora\',\'Baler\',\'Novo\'), (3,\'Brgy.Suclayin,Baler,Aurora\',\'Baler\',\'N.E\'), (4,\'Brgy.Pingit,Baler,Aurora\',\'Baler\',\'Robinsons\'), (5,\'Brgy.4,Casiguran,Aurora\',\'CASIGURAN\',\'IKAS\')', null, false)
+ 5 SYSTEMPATH\Database\BaseBuilder.php(2230): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+ 6 APPPATH\Database\Seeds\DtiAuroraSeeder.php(49): CodeIgniter\Database\BaseBuilder->insertBatch([...])
+ 7 SYSTEMPATH\Database\Seeder.php(155): App\Database\Seeds\DtiAuroraSeeder->run()
+ 8 SYSTEMPATH\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Seeds\\DtiAuroraSeeder')
+ 9 SYSTEMPATH\CLI\Commands.php(74): CodeIgniter\Commands\Database\Seed->run([])
+10 SYSTEMPATH\CLI\Console.php(47): CodeIgniter\CLI\Commands->run('db:seed', [...])
+11 SYSTEMPATH\Boot.php(442): CodeIgniter\CLI\Console->run()
+12 SYSTEMPATH\Boot.php(166): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+13 ROOTPATH\spark(87): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+CRITICAL - 2026-02-13 02:27:10 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "DTI-LOGO.png class="
+[Method: GET, Route: assets/images/DTI-LOGO.png%20class=]
+in SYSTEMPATH\Router\Router.php on line 768.
+ 1 SYSTEMPATH\Router\Router.php(219): CodeIgniter\Router\Router->checkDisallowedChars('assets/images/DTI-LOGO.png class=')
+ 2 SYSTEMPATH\CodeIgniter.php(829): CodeIgniter\Router\Router->handle('assets/images/DTI-LOGO.png class=')
+ 3 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 02:27:41 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "DTI-LOGO.png class="
+[Method: GET, Route: assets/images/DTI-LOGO.png%20class=]
+in SYSTEMPATH\Router\Router.php on line 768.
+ 1 SYSTEMPATH\Router\Router.php(219): CodeIgniter\Router\Router->checkDisallowedChars('assets/images/DTI-LOGO.png class=')
+ 2 SYSTEMPATH\CodeIgniter.php(829): CodeIgniter\Router\Router->handle('assets/images/DTI-LOGO.png class=')
+ 3 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 02:52:42 --> Error: Undefined constant "routes"
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Config\Routes.php on line 26.
+ 1 SYSTEMPATH\Router\RouteCollection.php(339): require()
+ 2 SYSTEMPATH\CodeIgniter.php(818): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 02:52:45 --> Error: Undefined constant "routes"
+[Method: GET, Route: admin]
+in APPPATH\Config\Routes.php on line 26.
+ 1 SYSTEMPATH\Router\RouteCollection.php(339): require()
+ 2 SYSTEMPATH\CodeIgniter.php(818): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 02:52:46 --> Error: Undefined constant "routes"
+[Method: GET, Route: admin]
+in APPPATH\Config\Routes.php on line 26.
+ 1 SYSTEMPATH\Router\RouteCollection.php(339): require()
+ 2 SYSTEMPATH\CodeIgniter.php(818): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 02:52:46 --> Error: Undefined constant "routes"
+[Method: GET, Route: admin]
+in APPPATH\Config\Routes.php on line 26.
+ 1 SYSTEMPATH\Router\RouteCollection.php(339): require()
+ 2 SYSTEMPATH\CodeIgniter.php(818): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-13 02:52:47 --> Error: Undefined constant "routes"
+[Method: GET, Route: admin/dashboard]
+in APPPATH\Config\Routes.php on line 26.
+ 1 SYSTEMPATH\Router\RouteCollection.php(339): require()
+ 2 SYSTEMPATH\CodeIgniter.php(818): CodeIgniter\Router\RouteCollection->loadRoutes()
+ 3 SYSTEMPATH\CodeIgniter.php(441): CodeIgniter\CodeIgniter->tryToRouteIt(null)
+ 4 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

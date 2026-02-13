@@ -13,24 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
-        <div class="d-flex align-items-center">
-          <img src="<?= base_url('images/dti-logo.png') ?>" alt="DTI logo" class="site-logo me-3" />
-          <div>
-            <h4 class="mb-0">Price Monitoring - DTI AURORA</h4>
-            <div class="header-sub">The Official Website of DTI Aurora Price Monitoring System</div>
-          </div>
-        </div>
-      </div>
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a class="nav-link px-3" href="<?= base_url('infos') ?>"><i class="bi bi-info-circle pe-2" aria-hidden="true"></i>Infos</a></li>
-        <li class="nav-item"><a class="nav-link px-3 active" href="<?= base_url('monitoring') ?>"><i class="bi bi-bar-chart-line pe-2" aria-hidden="true"></i>Price Monitoring</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="<?= base_url('price-comparison') ?>"><i class="bi bi-arrow-left-right pe-2" aria-hidden="true"></i>Price Comparison</a></li>
-      </ul>
-    </div>
-  </header>
+  <?= view('partials/header') ?>
 
   <div class="container mt-3 d-flex justify-content-end">
     <div class="input-group" style="width:360px;">
@@ -101,7 +84,7 @@
      
       <div class="modal-badge"><span class="tag-badge-sm" id="modalFloatingCategory"></span></div>
       <div class="modal-header d-flex justify-content-between align-items-start">
-        <div class="modal-logo" aria-hidden="true"><img src="<?= base_url('images/dti-logo.png') ?>" alt="DTI" /></div>
+        <div class="modal-logo" aria-hidden="true"><img src="<?= base_url('assets/images/DTI-LOGO.png') ?>" alt="DTI" /></div>
         <div class="modal-header-content">
           <div class="h4 mb-1">Product Details</div>
           <div class="small ">DTI Price Monitoring — <span id="modalHeaderMunicipality">Municipality</span></div>
@@ -577,47 +560,7 @@
     loadProducts();
   </script>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="row footer-inner py-5 text-white">
-        <div class="col-md-4 mb-4 footer-about">
-          <h5 class="text-white">About Us</h5>
-          <p class="small text-white-50">An ordinance establishing the provincial online price monitoring system (PO PMS), regulating reporting of prices for basic necessities and prime commodities, promoting transparency in price monitoring.</p>
-          <ul class="list-unstyled contact-list mt-3 small text-white-50">
-            <li><i class="bi bi-geo-alt-fill me-2"></i>Capitol Compound, San Jose, City of Balanga, Bataan</li>
-            <li><i class="bi bi-clock me-2"></i>Mon – Fri: 8:00 am – 5:00 pm</li>
-            <li><i class="bi bi-telephone me-2"></i>(047) 237 3488</li>
-            <li><i class="bi bi-envelope me-2"></i>pgo@bataan.gov.ph</li>
-          </ul>
-        </div>
-        <div class="col-md-4 mb-4 footer-links">
-          <h5 class="text-white">Government Links</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item"><a class="nav-link p-0 small text-white-50" href="#">Office of the President</a></li>
-            <li class="nav-item"><a class="nav-link p-0 small text-white-50" href="#">Office of the Vice President</a></li>
-            <li class="nav-item"><a class="nav-link p-0 small text-white-50" href="#">Senate of the Philippines</a></li>
-            <li class="nav-item"><a class="nav-link p-0 small text-white-50" href="#">Supreme Court</a></li>
-            <li class="nav-item"><a class="nav-link p-0 small text-white-50" href="#">Court of Appeals</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4 mb-4 footer-logos">
-          <h5 class="text-white">Republic of the Philippines</h5>
-          <p class="small text-white-50">All content is in the public domain unless otherwise stated.</p>
-          <div class="d-flex gap-2 mt-3">
-            <img src="<?= base_url('images/dti-logo.png') ?>" alt="dti" class="footer-logo"/>
-            <img src="<?= base_url('images/dti-logo.png') ?>" alt="agri" class="footer-logo"/>
-            <img src="<?= base_url('images/dti-logo.png') ?>" alt="prov" class="footer-logo"/>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bar text-white-50 py-3">
-      <div class="container d-flex justify-content-between align-items-center">
-        <div>© 2026 - Price Monitoring — DTI Aurora. All Rights Reserved</div>
-        <div class="powered small">Powered by <img src="<?= base_url('images/dti-logo.png') ?>" alt="powered" style="height:18px;vertical-align:middle;margin-left:6px"/></div>
-      </div>
-    </div>
-  </footer>
+  <?= view('partials/footer') ?>
 
 </body>
 </html>

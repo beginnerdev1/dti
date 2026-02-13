@@ -9,7 +9,7 @@
   <title>Price Comparison - DTI AURORA</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="<?= base_url('assets/css/home.css') ?>" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     .analytics-wrap{display:flex;gap:20px;align-items:flex-start}
@@ -26,24 +26,11 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container d-flex justify-content-between align-items-center">
-      <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
-        <div class="d-flex align-items-center">
-          <img src="<?= base_url('images/dti-logo.png') ?>" alt="DTI logo" class="site-logo me-3" />
-          <div>
-            <h4 class="mb-0">Price Monitoring - DTI AURORA</h4>
-            <div class="header-sub">The Official Website of DTI Aurora Price Monitoring System</div>
-          </div>
-        </div>
-      </div>
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a class="nav-link px-3" href="<?= base_url('infos') ?>"><i class="bi bi-info-circle pe-2" aria-hidden="true"></i>Infos</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="<?= base_url('monitoring') ?>"><i class="bi bi-bar-chart-line pe-2" aria-hidden="true"></i>Price Monitoring</a></li>
-        <li class="nav-item"><a class="nav-link px-3 active" href="<?= base_url('price-comparison') ?>"><i class="bi bi-arrow-left-right pe-2" aria-hidden="true"></i>Price Comparison</a></li>
-      </ul>
-    </div>
-  </header>
+ 
+    
+          <?= view('partials/header') ?>
+       
+
 
   <main class="container py-4">
     <h2 class="mb-3">Price Comparison — Analytics.</h2>
@@ -254,5 +241,7 @@
     loadProducts();
   </script>
 
-</body>
-</html> 
+    <?= view('partials/footer') ?>
+
+  </body>
+  </html>

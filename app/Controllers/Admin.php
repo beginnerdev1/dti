@@ -48,4 +48,13 @@ class Admin extends BaseController
 
         return view('admin/dashboard');
     }
+
+    public function productStoreManagement()
+    {
+        if (!session()->get('admin_logged_in')) {
+            return redirect()->to('/admin/login');
+        }
+
+        return view('admin/product-store-management');
+    }
 }
