@@ -1,0 +1,68 @@
+# CodeIgniter 4 Specific
+writable/cache/*
+!writable/cache/.gitkeep
+writable/logs/*
+!writable/logs/.gitkeep
+writable/session/*
+!writable/session/.gitkeep
+writable/uploads/*
+!writable/uploads/.gitkeep
+writable/debugbar/*
+
+# Environment variables
+.env
+.env.local
+.env.*.php
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-project
+*.sublime-workspace
+
+# Dependencies
+vendor/
+node_modules/
+package-lock.json
+composer.lock
+
+# OS Files
+.DS_Store
+.gitkeep
+Thumbs.db
+*.log
+
+# Build artifacts
+dist/
+build/
+
+# Local development
+localhost.pem
+localhost-key.pem
+
+# Database
+*.sqlite
+*.sqlite3
+*.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node/npm
+npm-debug.log
+yarn-error.log
+
+# Documentation
+docs/build/
+
+# PHPUnit
+phpunit.xml
+coverage/
+.phpunit.result.cache
