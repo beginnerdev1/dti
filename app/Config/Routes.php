@@ -28,3 +28,5 @@ $routes->get('admin/dashboard', 'Admin::dashboard');
 //Product & Store Management routes
 $routes->get('admin/product-store-management', 'Admin::productStoreManagement');
 $routes->post('admin/saveProduct', 'Admin::saveProduct');
+$routes->post('admin/saveStore', 'Admin::saveStore');
+$routes->post('admin/savePrice', 'Admin::savePrice');

@@ -28,9 +28,9 @@
         <h5 class="text-white">Republic of the Philippines</h5>
         <p class="small text-white-50">All content is in the public domain unless otherwise stated.</p>
         <div class="d-flex gap-2 mt-3">
-          <img src="<?= base_url('images/dti-logo.png') ?>" alt="dti" class="footer-logo"/>
-          <img src="<?= base_url('images/dti-logo.png') ?>" alt="agri" class="footer-logo"/>
-          <img src="<?= base_url('images/dti-logo.png') ?>" alt="prov" class="footer-logo"/>
+          <img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="dti" class="footer-logo"/>
+          <img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="agri" class="footer-logo"/>
+          <img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="prov" class="footer-logo"/>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
   <div class="footer-bar text-white-50 py-3">
     <div class="container d-flex justify-content-between align-items-center">
       <div>© 2026 - Price Monitoring — DTI Aurora. All Rights Reserved</div>
-      <div class="powered small">Powered by <img src="<?= base_url('images/dti-logo.png') ?>" alt="powered" style="height:18px;vertical-align:middle;margin-left:6px"/></div>
+      <div class="powered small">Powered by <img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="powered" style="height:18px;vertical-align:middle;margin-left:6px"/></div>
     </div>
   </div>
 </footer>

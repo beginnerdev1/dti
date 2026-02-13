@@ -5,7 +5,7 @@
   <div class="container d-flex justify-content-between align-items-center">
     <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
       <div class="d-flex align-items-center">
-        <a href="<?= base_url() ?>"><img src="<?= base_url('assets/images/DTI-LOGO.png') ?>" alt="DTI logo" class="site-logo me-3" /></a>
+        <a href="<?= base_url() ?>"><img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="DTI logo" class="site-logo me-3" /></a>
         <div>
           <h4 class="mb-0">Price Monitoring - DTI AURORA</h4>
           <div class="header-sub">The Official Website of DTI Aurora Price Monitoring System</div>

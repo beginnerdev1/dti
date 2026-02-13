@@ -7,7 +7,7 @@
     <h5><i class="fa fa-user-shield"></i> Admin Dashboard</h5>
   </div>
   <div class="sidebar-content">
-      <a href="<?= base_url('admin/dashboard') ?>">
+    <a href="<?= site_url('admin/dashboard') ?>" class="active">
       <i class="fa fa-home"></i>
       <span>Dashboard</span>
     </a>

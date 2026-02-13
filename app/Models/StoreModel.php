@@ -4,31 +4,26 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProductModel extends Model
+class StoreModel extends Model
 {
-    protected $table = 'product';
+    protected $table = 'store';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['name', 'category', 'size', 'store_id'];
+    protected $allowedFields = ['name', 'municipality', 'location'];
     protected $useTimestamps = false;
 
     /**
-     * Validate and insert a product record.
-     * Returns inserted ID on success, or false on failure.
-     *
-     * @param array $data ['name'=>..., 'size'=>..., 'category'=>..., 'store_id'=>optional]
-     * @return int|false
+     * Validate and insert a store record.
+     * Returns inserted ID on success or false on failure.
      */
-    public function saveProduct(array $data)
+    public function saveStore(array $data)
     {
-        // basic required fields
-        if (empty($data['name']) || empty($data['size']) || empty($data['category'])) {
+        if (empty($data['name']) || empty($data['location']) || empty($data['municipality'])) {
             return false;
         }
 
-        // only keep allowed fields
         $safe = [];
         foreach ($this->allowedFields as $field) {
             if (isset($data[$field])) {
@@ -41,6 +36,7 @@ class ProductModel extends Model
             return $id ? (int)$id : false;
         } catch (\Exception $e) {
             return false;
+        
         }
     }
 }
