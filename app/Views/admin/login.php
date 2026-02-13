@@ -292,16 +292,16 @@
 
                 <div class="divider">Or login with email</div>
 
-                <form>
+                <form method="POST" action="<?= base_url('/admin/authenticate') ?>">
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" value="hamza@email.com">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Confirm Password</label>
+                        <label class="form-label">Password</label>
                         <div class="password-wrapper">
-                            <input type="password" class="form-control" id="passwordInput" value="••••••••••">
+                            <input type="password" name="password" class="form-control" id="passwordInput" required>
                             <button type="button" class="password-toggle" onclick="togglePassword()">
                                 <i class="bi bi-eye" id="eyeIcon"></i>
                             </button>

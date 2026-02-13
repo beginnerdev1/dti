@@ -14,6 +14,10 @@ $routes->get('api/categories', 'PriceMonitoring::getCategories');
 $routes->get('api/municipalities', 'PriceMonitoring::getMunicipalities');
 $routes->get('api/products/(:num)', 'PriceMonitoring::getProductDetails/$1');
 
+// Price Comparison routes
+$routes->get('price-comparison', 'PriceComparison::index');
+$routes->get('api/price-comparison/products', 'PriceComparison::getProducts');
+
 // Admin routes
 $routes->get('admin', 'Admin::login');
 $routes->get('admin/login', 'Admin::login');

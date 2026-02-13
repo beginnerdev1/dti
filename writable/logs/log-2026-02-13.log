@@ -1,0 +1,60 @@
+ERROR - 2026-02-13 00:00:33 --> Table 'dti_management.product' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT p.id AS pid, p.name AS pname, p.category, p.size,
+                    s.id AS store_id, s.name AS store_name, s.municipality, s.location,
+                    ph.price, ph.date
+                    FROM product p
+                    LEFT JOIN product_price ph ON ph.product_id = p.id
+                    LEFT JOIN store s ON ph.store_id = s.id
+                    ORDER BY LOWER(p.name) ASC, p.size ASC, ph.date ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT p.id AS pid, p.name AS pname, p.category, p.size,
+                    s.id AS store_id, s.name AS store_name, s.municipality, s.location,
+                    ph.price, ph.date
+                    FROM product p
+                    LEFT JOIN product_price ph ON ph.product_id = p.id
+                    LEFT JOIN store s ON ph.store_id = s.id
+                    ORDER BY LOWER(p.name) ASC, p.size ASC, ph.date ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT p.id AS pid, p.name AS pname, p.category, p.size,
+                    s.id AS store_id, s.name AS store_name, s.municipality, s.location,
+                    ph.price, ph.date
+                    FROM product p
+                    LEFT JOIN product_price ph ON ph.product_id = p.id
+                    LEFT JOIN store s ON ph.store_id = s.id
+                    ORDER BY LOWER(p.name) ASC, p.size ASC, ph.date ASC')
+ 4 APPPATH\Controllers\PriceMonitoring.php(38): CodeIgniter\Database\BaseConnection->query('SELECT p.id AS pid, p.name AS pname, p.category, p.size,
+                    s.id AS store_id, s.name AS store_name, s.municipality, s.location,
+                    ph.price, ph.date
+                    FROM product p
+                    LEFT JOIN product_price ph ON ph.product_id = p.id
+                    LEFT JOIN store s ON ph.store_id = s.id
+                    ORDER BY LOWER(p.name) ASC, p.size ASC, ph.date ASC')
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\PriceMonitoring->getProducts()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PriceMonitoring))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-13 00:00:33 --> Table 'dti_management.product' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT DISTINCT category FROM product WHERE category IS NOT NULL AND category != \'\' ORDER BY category ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT DISTINCT category FROM product WHERE category IS NOT NULL AND category != \'\' ORDER BY category ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT DISTINCT category FROM product WHERE category IS NOT NULL AND category != \'\' ORDER BY category ASC')
+ 4 APPPATH\Controllers\PriceMonitoring.php(86): CodeIgniter\Database\BaseConnection->query('SELECT DISTINCT category FROM product WHERE category IS NOT NULL AND category != \'\' ORDER BY category ASC')
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\PriceMonitoring->getCategories()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PriceMonitoring))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-02-13 00:00:33 --> Table 'dti_management.store' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT DISTINCT municipality FROM store WHERE municipality IS NOT NULL AND municipality != \'\' ORDER BY municipality ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT DISTINCT municipality FROM store WHERE municipality IS NOT NULL AND municipality != \'\' ORDER BY municipality ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT DISTINCT municipality FROM store WHERE municipality IS NOT NULL AND municipality != \'\' ORDER BY municipality ASC')
+ 4 APPPATH\Controllers\PriceMonitoring.php(102): CodeIgniter\Database\BaseConnection->query('SELECT DISTINCT municipality FROM store WHERE municipality IS NOT NULL AND municipality != \'\' ORDER BY municipality ASC')
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\PriceMonitoring->getMunicipalities()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\PriceMonitoring))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
