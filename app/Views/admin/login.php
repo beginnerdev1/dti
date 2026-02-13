@@ -265,32 +265,11 @@
         <div class="row h-100">
             <!-- Left Section - Login Form -->
             <div class="col-md-6 col-lg-5 left-section">
-                <div class="logo">pixel</div>
-                
-                <div class="language-selector">
-                    <span>🇺🇸</span>
-                    <span>EN</span>
-                    <i class="bi bi-chevron-down"></i>
-                </div>
+                <div class="logo">Logo</div>
 
                 <h1 class="login-title">Login</h1>
 
-                <button class="social-btn google">
-                    <svg width="18" height="18" viewBox="0 0 18 18">
-                        <path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z"/>
-                        <path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.183l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"/>
-                        <path fill="#FBBC05" d="M3.964 10.707c-.18-.54-.282-1.117-.282-1.707 0-.593.102-1.17.282-1.709V4.958H.957C.347 6.173 0 7.548 0 9c0 1.452.348 2.827.957 4.042l3.007-2.335z"/>
-                        <path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"/>
-                    </svg>
-                    Sign in with Google
-                </button>
-
-                <button class="social-btn facebook">
-                    <i class="bi bi-facebook" style="font-size: 18px;"></i>
-                    Sign in with Facebook
-                </button>
-
-                <div class="divider">Or login with email</div>
+                <div class="divider">Log In</div>
 
                 <form method="POST" action="<?= base_url('/admin/authenticate') ?>">
                     <div class="mb-3">
@@ -322,11 +301,7 @@
 
             <!-- Right Section - Image -->
             <div class="col-md-6 col-lg-7 right-section p-0">
-                <div class="top-right-buttons">
-                    <button class="btn btn-outline-light">Sign Up</button>
-                    <button class="btn btn-light">Join us</button>
-                </div>
-                <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=1200&q=80" alt="Palm tree" class="palm-image">
+                <img src="https://dzrh.com.ph/_next/image?url=https%3A%2F%2Fdzrh-bucket.s3.ap-southeast-1.amazonaws.com%2Ffeaturedimage%2Fph-gearing-to-achieve-yearlong-growth-dti%2F416836655_328132470052860_6284358710598766290_n%2520%25281%2529.jpg&w=3840&q=50" alt="Palm tree" class="palm-image">
             </div>
         </div>
     </div>
