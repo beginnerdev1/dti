@@ -5,7 +5,7 @@
   </button>
   <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
     <div class="d-flex align-items-center gap-3">
-      <a href="<?= base_url() ?>"><img src="<?= base_url('assets/images/DTI-LOGO.png') ?>" alt="DTI Philippines Logo" class="site-logo"></a>
+      <a href="<?= base_url() ?>"><img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="DTI Philippines Logo" class="site-logo"></a>
       <div>
         <h4>Department of Trade and Industry</h4>
         <div class="header-sub">Aurora Province - Price Monitoring System</div>

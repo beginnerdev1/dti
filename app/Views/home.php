@@ -84,7 +84,7 @@
      
       <div class="modal-badge"><span class="tag-badge-sm" id="modalFloatingCategory"></span></div>
       <div class="modal-header d-flex justify-content-between align-items-start">
-        <div class="modal-logo" aria-hidden="true"><img src="<?= base_url('assets/images/DTI-LOGO.png') ?>" alt="DTI" /></div>
+        <div class="modal-logo" aria-hidden="true"><img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="DTI" /></div>
         <div class="modal-header-content">
           <div class="h4 mb-1">Product Details</div>
           <div class="small ">DTI Price Monitoring — <span id="modalHeaderMunicipality">Municipality</span></div>

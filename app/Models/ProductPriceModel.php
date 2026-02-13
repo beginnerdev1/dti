@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class ProductPriceModel extends Model
+{
+    protected $table = 'product_price';
+    protected $primaryKey = 'id';
+    protected $useAutoIncrement = true;
+    protected $returnType = 'array';
+    protected $useSoftDeletes = false;
+    protected $allowedFields = ['product_id', 'store_id', 'price', 'date'];
+    protected $useTimestamps = false;
+}
