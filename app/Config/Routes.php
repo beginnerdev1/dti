@@ -5,28 +5,13 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Home::home');
-
-// Price Monitoring routes
-$routes->get('monitoring', 'PriceMonitoring::index');
-$routes->get('api/products', 'PriceMonitoring::getProducts');
-$routes->get('api/categories', 'PriceMonitoring::getCategories');
-$routes->get('api/municipalities', 'PriceMonitoring::getMunicipalities');
-$routes->get('api/products/(:num)', 'PriceMonitoring::getProductDetails/$1');
-
-// Price Comparison routes
-$routes->get('price-comparison', 'PriceComparison::index');
-$routes->get('api/price-comparison/products', 'PriceComparison::getProducts');
+$routes->get('/', 'Home::index');
+$routes->get('index', 'Home::index');
+$routes->get('home', 'Home::home');
+$routes->get('aboutus', 'Home::aboutus');
+$routes->get('shops', 'Home::shops');
 
 // Admin routes
-$routes->get('admin', 'Admin::login');
-$routes->get('admin/login', 'Admin::login');
-$routes->post('admin/authenticate', 'Admin::authenticate');
-$routes->get('admin/logout', 'Admin::logout');
 $routes->get('admin/dashboard', 'Admin::dashboard');
-
-//Product & Store Management routes
-$routes->get('admin/product-store-management', 'Admin::productStoreManagement');
-$routes->post('admin/saveProduct', 'Admin::saveProduct');
-$routes->post('admin/saveStore', 'Admin::saveStore');
-$routes->post('admin/savePrice', 'Admin::savePrice');
+$routes->post('admin/add-shop', 'Admin::addShop');
+$routes->get('admin/get-shops', 'Admin::getShops');

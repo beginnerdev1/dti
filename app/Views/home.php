@@ -1,566 +1,679 @@
-<?php
-// Data is loaded via API endpoints from the controller
-?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Price Monitoring - DTI AURORA</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link href="<?= base_url('assets/css/home.css') ?>" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Locally | Discover & Support Local Treasures</title>
+    <!-- Google Fonts: Poppins (weights 400,500,600,700) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (free icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #FAF9F6; /* Cream White page background */
+            color: #0B3D2E; /* Deep Green text */
+            line-height: 1.4;
+        }
+
+        /* brand palette: primary greens, gold accents, and neutrals */
+        :root {
+            --green-deep: #06281C;
+            --green-primary: #0B3D2E;
+            --green-soft: #146B4D;
+            --green-light: #EAF4EE;
+            --gold-main: #D4AF37;
+            --gold-dark: #9C7412;
+            --gold-soft: #F8E7A8;
+            --gold-pale: #FFF7D6;
+            --white: #FFFFFF;
+            --cream-bg: #F8F7F2;
+            --neutral-gray: #667085;
+            --shadow-sm: 0 10px 30px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
+            --shadow-md: 0 25px 45px rgba(0,0,0,0.12);
+            --border-radius-card: 1.6rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header / Hero */
+        .hero {
+            background: linear-gradient(135deg, #06281C 0%, #0B3D2E 45%, #146B4D 100%);
+            border-bottom: 4px solid var(--gold-main);
+            border-radius: 0 0 2.5rem 2.5rem;
+            padding: 2rem 0 4rem 0;
+            margin-bottom: 2rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+ 
+        .hero::after {
+           
+            font-size: 220px;
+            opacity: 0.05;
+            position: absolute;
+            bottom: -40px;
+            right: -20px;
+            font-family: monospace;
+            pointer-events: none;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo img {
+            width: auto;
+            max-height: 110px;
+            max-width: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FEF1CF;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: white;
+            font-weight: 600;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-main);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0%;
+            height: 2px;
+            background: var(--gold-main);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: white;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--gold-main);
+            border-bottom: 3px solid var(--gold-main);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #E5E7EB;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #D4AF37, #B68A16);
+            color: #06281C;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(212,175,55,0.25);
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(135deg, #E6C252, #C99A1C);
+            box-shadow: 0 20px 35px rgba(212,175,55,0.35);
+        }
+
+        /* featured sections generic */
+        .section {
+            margin: 4rem 0;
+        }
+
+        .section-header {
+            border-left: 6px solid var(--gold-main);
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--green-primary);
+        }
+
+        .section-header a {
+            color: var(--gold-dark);
+            font-weight: 600;
+        }
+
+        /* card grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card, .shop-card {
+            background: var(--white);
+            border-radius: var(--border-radius-card);
+            overflow: hidden;
+            border: 1px solid rgba(212,175,55,0.18);
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .product-card:hover, .shop-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold-main);
+        }
+
+        .card-img {
+            background: linear-gradient(135deg, #0B3D2E, #146B4D);
+            color: var(--gold-main);
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .card-content {
+            padding: 1.3rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .price {
+            color: var(--gold-dark);
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0.5rem 0;
+        }
+
+        .vendor,
+        .location {
+            color: var(--neutral-gray);
+            font-size: 0.9rem;
+            margin: 4px 0;
+        }
+
+        .rating {
+            margin-top: 10px;
+            color: var(--gold-main);
+            font-weight: 700;
+        }
+
+        .badge-prodcount {
+            background: var(--green-light);
+            color: var(--green-primary);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-left: 8px;
+        }
+
+        /* Featured Shops row similar */
+        .shop-card .card-img {
+            background: #EADDB8;
+            font-size: 2.5rem;
+        }
+
+        /* about us + categories + products layout */
+        .info-panel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            background: var(--white);
+            border-radius: 2rem;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #EFE6D2;
+        }
+
+        .categories, .products-preview {
+            flex: 1;
+        }
+
+        .categories h3, .products-preview h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--green-deep);
+            font-weight: 600;
+        }
+
+        .cat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .cat-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed #ede3cf;
+        }
+
+        .product-preview-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .preview-link {
+            background: var(--gold-soft);
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: 0.1s;
+            text-align: center;
+        }
+
+        /* filter bar */
+        .filter-bar {
+            background: white;
+            border-radius: 80px;
+            padding: 0.8rem 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin: 1.5rem 0 2rem;
+            border: 1px solid #EBE0CA;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            background: var(--gold-soft);
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--green-deep);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: default;
+        }
+
+        .view-all-btn {
+            background: var(--green-primary);
+            color: white;
+            border-radius: 40px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        /* All products grid */
+        .all-products-title {
+            font-size: 1.7rem;
+            margin: 1rem 0 0.5rem;
+            font-weight: 700;
+        }
+
+        .result-stats {
+            color: var(--neutral-gray);
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+        }
+
+        /* footer */
+        .footer {
+            background: linear-gradient(135deg, #041B13, #0B3D2E);
+            border-top: 3px solid var(--gold-main);
+            color: white;
+            margin-top: 5rem;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .footer-col {
+            min-width: 140px;
+        }
+
+        .footer-col h4 {
+            color: var(--gold-main);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col a {
+            display: block;
+            margin: 0.6rem 0;
+            opacity: 0.85;
+        }
+
+        .footer-col a:hover {
+            color: var(--gold-main);
+            opacity: 1;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 1.5rem;
+            color: #D1D5DB;
+            font-size: 0.9rem;
+        }
+
+        i {
+            margin-right: 4px;
+        }
+
+        @media (max-width: 780px) {
+            .hero-content h1 { font-size: 2.4rem; }
+            .card-grid { grid-template-columns: 1fr; }
+            .nav { flex-direction: column; }
+            .nav-links { justify-content: center; }
+            .logo img { max-height: 70px; }
+        }
+    </style>
 </head>
 <body>
-  <?= view('partials/header') ?>
-
-  <div class="container mt-3 d-flex justify-content-end">
-    <div class="input-group" style="width:360px;">
-      <span class="input-group-text bg-transparent border-0" id="search-addon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="text-muted">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.415l-3.85-3.85zm-5.242 1.11a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/>
-        </svg>
-      </span>
-      <input id="searchBox" class="form-control" placeholder="Search product" aria-label="Search" aria-describedby="search-addon" />
+<div class="hero">
+    <div class="container">
+        <div class="nav">
+            <div class="logo">
+                <img src="<?= base_url('images/DTI-CARP_Logo-removebg-preview.png') ?>" alt="CARP Logo">
+                <img src="<?= base_url('images/DTI-LOGO.png') ?>" alt="DTI Logo">
+            </div>
+            <div class="nav-links">
+                <a href="<?= base_url('/') ?>">Home</a>
+                <a href="<?= base_url('shops') ?>">Shops</a>
+                <a href="<?= base_url('aboutus') ?>">About Us</a>
+            </div>
+        </div>
+        <div class="hero-content">
+            <h1>DTI-CARP Connect : Aurora CARPreneurs E-Brochure Hub</h1>
+            <p>Explore a wide variety of quality products from trusted local sellers in your community.</p>
+            <a href="#" class="btn-primary"><i class="fas fa-store"></i> BROWSE PRODUCTS</a>
+        </div>
     </div>
-  </div>
+</div>
 
-  <main class="container-fluid px-0 my-4">
-    <div class="grid grid-cols-1 gap-0 lg:grid-cols-12">
-      <div class="lg:col-span-5 left-panel">
+<div class="container">
+    <!-- Featured Products -->
+    <div class="section">
+        <div class="section-header">
+            <h2><i class="fas fa-star-of-life" style="color: var(--gold-main);"></i> Featured Products</h2>
+            <a href="#">View all →</a>
+        </div>
+        <div class="card-grid">
+            <!-- product 1 -->
+            <div class="product-card">
+                <div class="card-img">🍯</div>
+                <div class="card-content">
+                    <div class="product-title">Pure Raw Honey</div>
+                    <div class="price">$250.00</div>
+                    <div class="vendor"><i class="fas fa-store"></i> Marla's Honey</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Bale, Aurora</div>
+                    <div class="rating"><i class="fas fa-star"></i> 4.9 <span class="badge-prodcount">18 Products</span></div>
+                </div>
+            </div>
+            <!-- product 2: Handwoven Abaca Bag -->
+            <div class="product-card">
+                <div class="card-img">👜</div>
+                <div class="card-content">
+                    <div class="product-title">Handwoven Abaca Bag</div>
+                    <div class="price">$150.00</div>
+                    <div class="vendor"><i class="fas fa-store"></i> Weave & Wonder</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Ratti Panaram / Bale</div>
+                    <div class="rating"><i class="fas fa-star"></i> 4.8 <span class="badge-prodcount">Grow Your Business</span></div>
+                </div>
+            </div>
+            <!-- product 3: Organic Coconut Soap -->
+            <div class="product-card">
+                <div class="card-img">🧼🌿</div>
+                <div class="card-content">
+                    <div class="product-title">Organic Coconut Soap</div>
+                    <div class="price">$120.00</div>
+                    <div class="vendor"><i class="fas fa-store"></i> Jasmines Delicacies</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> Biot, Aurora</div>
+                    <div class="rating"><i class="fas fa-star"></i> 3.5 <span class="badge-prodcount">Dried Mango</span></div>
+                </div>
+            </div>
+            <!-- product 4: Herbal Wellness Tea -->
+            <div class="product-card">
+                <div class="card-img">🍃🍵</div>
+                <div class="card-content">
+                    <div class="product-title">Herbal Wellness Tea</div>
+                    <div class="price">$150.00</div>
+                    <div class="vendor"><i class="fas fa-store"></i> Kimchi & Thread</div>
+                    <div class="location"><i class="fas fa-map-marker-alt"></i> San Luli, Aurora</div>
+                    <div class="rating"><i class="fas fa-star"></i> 3.5 <span class="badge-prodcount">Handmade Macrame</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Shops -->
+    <div class="section">
+        <div class="section-header">
+            <h2><i class="fas fa-shop"></i> Featured Shops</h2>
+            <a href="#">All shops →</a>
+        </div>
+        <div class="card-grid">
+            <div class="shop-card">
+                <div class="card-img">🍯🐝</div>
+                <div class="card-content">
+                    <div class="product-title">Maria's Honey</div>
+                    <div class="location">Bale, Aurora</div>
+                    <div class="rating"><i class="fas fa-star"></i> 4.9 · 18 Products</div>
+                </div>
+            </div>
+            <div class="shop-card">
+                <div class="card-img">🧵✨</div>
+                <div class="card-content">
+                    <div class="product-title">Lilha Studio</div>
+                    <div class="location">Bale, Aurora</div>
+                    <div class="rating"><i class="fas fa-star"></i> 4.8 · 24 Products</div>
+                </div>
+            </div>
+            <div class="shop-card">
+                <div class="card-img">🌴🌊</div>
+                <div class="card-content">
+                    <div class="product-title">Island Essentials</div>
+                    <div class="location">Bale, Aurora</div>
+                    <div class="rating"><i class="fas fa-star"></i> 4.7 · 15 Products</div>
+                </div>
+            </div>
+            <div class="shop-card">
+                <div class="card-img">🌿🍃</div>
+                <div class="card-content">
+                    <div class="product-title">Green Leaf PH</div>
+                    <div class="location">Bale, Aurora</div>
+                    <div class="rating"><i class="fas fa-star"></i> 4.7 · 22 Products</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="all-products-title">
+        <i class="fas fa-leaf" style="color: var(--green-soft);"></i> All Products
+    </div>
+    <div class="result-stats">
+        Showing 1–12 of 100 products
+    </div>
+    <div class="card-grid">
+        <!-- additional product rows representing local items (blend of local artisan) -->
         <div class="product-card">
-          <div id="selectedTitle"><strong>Select a product to view details</strong></div>
-          <div class="mt-3">
-            <div class="row g-2 mb-2 align-items-end">
-              <div class="col-md-5">
-                <label for="dateFrom" class="form-label small mb-1 text-muted">Date From</label>
-                <input id="dateFrom" type="date" class="form-control form-control-sm" />
-              </div>
-              <div class="col-auto d-flex align-items-center justify-content-center px-1">
-                <i class="bi bi-arrow-right-short text-muted" aria-hidden="true" style="font-size:1.35rem;"></i>
-              </div>
-              <div class="col-md-5">
-                <label for="dateTo" class="form-label small mb-1 text-muted">Date To</label>
-                <input id="dateTo" type="date" class="form-control form-control-sm" />
-              </div>
-            </div>
-            <div class="chart-container">
-              <canvas id="priceChart"></canvas>
-            </div>
-          </div>
+            <div class="card-img">🥭</div>
+            <div class="card-content"><div class="product-title">Dried Mangoes</div><div class="price">$85.00</div><div class="vendor">Auro Mango Co.</div><div class="rating">★ 4.8</div></div>
         </div>
-      </div>
-
-      <div class="lg:col-span-7 right-panel">
-        <div class="product-card1">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div>
-              <strong style="display:inline-flex;align-items:center;gap:8px">Products <span class="badge bg-secondary product-count-badge" id="productCount">0</span></strong>
-            </div>
-          </div>
-          <div class="mb-3 d-flex justify-content-between align-items-center">
-            <div>
-              <select id="categoryFilter" class="form-select category-select" style="width:220px;">
-                <option value="all">All Categories</option>
-              </select>
-            </div>
-            <div>
-              <select id="municipalityFilter" class="form-select" style="width:220px;">
-                <option value="all">All Municipalities</option>
-              </select>
-            </div>
-          </div>
-          <div id="productList"></div>
+        <div class="product-card">
+            <div class="card-img">🧺</div>
+            <div class="card-content"><div class="product-title">Macrame Wall Hanging</div><div class="price">$210.00</div><div class="vendor">Thread & Folk</div><div class="rating">★ 4.9</div></div>
         </div>
-      </div>
-
+        <div class="product-card">
+            <div class="card-img">🌿🫒</div>
+            <div class="card-content"><div class="product-title">Organic Virgin Coconut Oil</div><div class="price">$95.00</div><div class="vendor">CocoEssence</div><div class="rating">★ 4.7</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🍃🍚</div>
+            <div class="card-content"><div class="product-title">Heirloom Rice Blend</div><div class="price">$65.00</div><div class="vendor">Aurora Grains</div><div class="rating">★ 4.6</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🏺</div>
+            <div class="card-content"><div class="product-title">Handmade Pottery Mug</div><div class="price">$48.00</div><div class="vendor">Clay & Co.</div><div class="rating">★ 4.9</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🌸</div>
+            <div class="card-content"><div class="product-title">Calming Herbal Tea</div><div class="price">$120.00</div><div class="vendor">Mountain Herbs PH</div><div class="rating">★ 4.5</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🧴</div>
+            <div class="card-content"><div class="product-title">Lemon Grass Soap Set</div><div class="price">$98.00</div><div class="vendor">Island Aroma</div><div class="rating">★ 4.8</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🪴</div>
+            <div class="card-content"><div class="product-title">Snake Plant in Pot</div><div class="price">$55.00</div><div class="vendor">Green thumb PH</div><div class="rating">★ 4.7</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🧣</div>
+            <div class="card-content"><div class="product-title">Handwoven Textile Scarf</div><div class="price">$185.00</div><div class="vendor">Weave Aurora</div><div class="rating">★ 4.8</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🍯🌿</div>
+            <div class="card-content"><div class="product-title">Raw Honey & Propolis</div><div class="price">$220.00</div><div class="vendor">Marla's Honey</div><div class="rating">★ 4.9</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🧺🧵</div>
+            <div class="card-content"><div class="product-title">Abaca Tote Bag</div><div class="price">$132.00</div><div class="vendor">Ratti Panaram</div><div class="rating">★ 4.7</div></div>
+        </div>
+        <div class="product-card">
+            <div class="card-img">🍪</div>
+            <div class="card-content"><div class="product-title">Local Ube Cookies</div><div class="price">$38.00</div><div class="vendor">Jasmines Delicacies</div><div class="rating">★ 4.6</div></div>
+        </div>
     </div>
-  </main>
-
-  <!-- Modal overlay -->
-  <div id="modalOverlay" class="modal-overlay" onclick="if(event.target.id==='modalOverlay') closeModal()" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true">
-     
-      <div class="modal-badge"><span class="tag-badge-sm" id="modalFloatingCategory"></span></div>
-      <div class="modal-header d-flex justify-content-between align-items-start">
-        <div class="modal-logo" aria-hidden="true"><img src="<?= base_url('assets/DTI-LOGO.png') ?>" alt="DTI" /></div>
-        <div class="modal-header-content">
-          <div class="h4 mb-1">Product Details</div>
-          <div class="small ">DTI Price Monitoring — <span id="modalHeaderMunicipality">Municipality</span></div>
-           
-          <div class="mt-2"><strong id="modalProductName">Product</strong> <span class="tag-badge" id="modalProductCategory">Category</span></div>
-        </div>
-        <button class="btn btn-sm btn-close-modal" onclick="closeModal()">✕</button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <br>
-          <div class="d-flex align-items-center justify-content-between">
-            <strong>Price History</strong>
-            <div class="d-flex gap-2 align-items-center">
-              <div class="small text-white-50">Filter:</div>
-              <input id="modalDateFrom" type="date" class="form-control form-control-sm" style="width:160px;" />
-              <div class="small text-white-50">—</div>
-              <input id="modalDateTo" type="date" class="form-control form-control-sm" style="width:160px;" />
-            </div>
-          </div>
-          <div class="table-responsive mt-2">
-            <table class="table table-sm table-striped" aria-label="Price history table">
-              <thead>
-                <tr>
-                  <th scope="col"><i class="bi bi-shop" aria-hidden="true"></i> Store</th>
-                  <th scope="col" class="price-column">₱ Price (PHP)</th>
-                  <th scope="col" class="date-column"><i class="bi bi-calendar3" aria-hidden="true"></i> Date</th>
-                </tr>
-              </thead>
-              <tbody id="modalPriceHistoryTable"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
+    <div style="text-align: center; margin: 2rem 0;">
+        <a href="#" class="btn-primary" style="background: var(--green-primary); color: white;"><i class="fas fa-shopping-bag"></i> Load more products</a>
     </div>
-  </div>
+</div>
 
-  <script>
-    // ========================================
-    // PRICE MONITORING DASHBOARD
-    // API Configuration
-    // ========================================
-    const BASE_URL = '<?= base_url() ?>';
-    const API_ENDPOINTS = {
-      products: BASE_URL + 'api/products',
-      categories: BASE_URL + 'api/categories',
-      municipalities: BASE_URL + 'api/municipalities'
-    };
-
-    const CHART_COLORS = ['#ff6b4a', '#2ecc71', '#00a8ff', '#6c5ce7', '#f6c23e', '#fd79a8', '#4d7cfe', '#06b6d4'];
-
-    // ========================================
-    // Application State
-    // ========================================
-    let products = [];
-    let chart = null;
-
-    // ========================================
-    // DOM Elements Cache
-    // ========================================
-    const DOM = {
-      productListEl: document.getElementById('productList'),
-      productCountEl: document.getElementById('productCount'),
-      searchBox: document.getElementById('searchBox'),
-      categoryFilter: document.getElementById('categoryFilter'),
-      municipalityFilter: document.getElementById('municipalityFilter'),
-      dateFrom: document.getElementById('dateFrom'),
-      dateTo: document.getElementById('dateTo'),
-      selectedTitle: document.getElementById('selectedTitle'),
-      priceChart: document.getElementById('priceChart').getContext('2d'),
-      modalOverlay: document.getElementById('modalOverlay'),
-      modalProductName: document.getElementById('modalProductName'),
-      modalProductCategory: document.getElementById('modalProductCategory'),
-      modalHeaderMunicipality: document.getElementById('modalHeaderMunicipality'),
-      modalFloatingCategory: document.getElementById('modalFloatingCategory'),
-      modalPriceHistoryTable: document.getElementById('modalPriceHistoryTable'),
-      modalDateFrom: document.getElementById('modalDateFrom'),
-      modalDateTo: document.getElementById('modalDateTo')
-    };
-
-    // ========================================
-    // Helper Functions
-    // ========================================
-    function debounce(fn, wait = 200) {
-      let timeoutId;
-      return (...args) => {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => fn(...args), wait);
-      };
-    }
-
-    function createTableRow(store, price, date, location = '') {
-      const tr = document.createElement('tr');
-      
-      const storeTd = document.createElement('td');
-      storeTd.className = 'store-column';
-      const storeIcon = document.createElement('i');
-      storeIcon.className = 'bi bi-geo-alt-fill';
-      storeIcon.setAttribute('aria-hidden', 'true');
-      storeIcon.style.marginRight = '8px';
-      storeIcon.style.fontSize = '1.05rem';
-      storeTd.appendChild(storeIcon);
-      storeTd.appendChild(document.createTextNode(store + (location ? ' — ' + location : '')));
-      
-      const priceTd = document.createElement('td');
-      priceTd.textContent = '₱' + (price || 0).toFixed(2);
-      priceTd.className = 'price-column';
-      
-      const dateTd = document.createElement('td');
-      dateTd.textContent = date || '';
-      dateTd.className = 'date-column';
-      
-      tr.appendChild(storeTd);
-      tr.appendChild(priceTd);
-      tr.appendChild(dateTd);
-      
-      return tr;
-    }
-
-    function getDateRangeFilter(history, dateFrom, dateTo) {
-      if (!dateFrom && !dateTo) return history;
-      
-      let filtered = history.slice();
-      if (dateFrom && !dateTo) {
-        filtered = filtered.filter(h => h.date === dateFrom);
-      } else {
-        if (dateFrom) filtered = filtered.filter(h => h.date >= dateFrom);
-        if (dateTo) filtered = filtered.filter(h => h.date <= dateTo);
-      }
-      return filtered;
-    }
-
-    function deduplicateByStore(history) {
-      const latestByStore = {};
-      history.forEach(h => {
-        const key = ((h.store || '') + '||' + (h.location || '')).toLowerCase().trim();
-        if (!latestByStore[key] || new Date(h.date) > new Date(latestByStore[key].date)) {
-          latestByStore[key] = h;
-        }
-      });
-      return Object.values(latestByStore).sort((a, b) => new Date(b.date) - new Date(a.date));
-    }
-
-    // ========================================
-    // Data Loading
-    // ========================================
-    async function loadProducts() {
-      try {
-        const response = await fetch(API_ENDPOINTS.products);
-        products = await response.json();
-        loadFilters();
-        renderProducts();
-      } catch (error) {
-        console.error('Error loading products:', error);
-      }
-    }
-
-    async function loadFilters() {
-      try {
-        const [catResponse, muniResponse] = await Promise.all([
-          fetch(API_ENDPOINTS.categories),
-          fetch(API_ENDPOINTS.municipalities)
-        ]);
-
-        const categories = await catResponse.json();
-        categories.forEach(cat => {
-          const option = document.createElement('option');
-          option.value = cat;
-          option.textContent = cat;
-          DOM.categoryFilter.appendChild(option);
-        });
-
-        const municipalities = await muniResponse.json();
-        municipalities.forEach(muni => {
-          const option = document.createElement('option');
-          option.value = muni;
-          option.textContent = muni;
-          DOM.municipalityFilter.appendChild(option);
-        });
-      } catch (error) {
-        console.error('Error loading filters:', error);
-      }
-    }
-
-    // ========================================
-    // Product List Rendering
-    // ========================================
-    function renderProducts() {
-      const query = (DOM.searchBox.value || '').toLowerCase();
-      const dateFrom = DOM.dateFrom.value;
-      const dateTo = DOM.dateTo.value;
-      const category = DOM.categoryFilter.value;
-      const municipality = DOM.municipalityFilter.value || 'all';
-
-      const filtered = products.filter(p => {
-        if (category !== 'all') {
-          const pcat = (p.category || '').toString().trim().toLowerCase();
-          if (pcat !== category.toLowerCase()) return false;
-        }
-
-        if (municipality !== 'all') {
-          const hasMuni = p.priceHistory && p.priceHistory.some(h => {
-            if ((h.municipality || '').toLowerCase() !== municipality.toLowerCase()) return false;
-            if (dateFrom && h.date < dateFrom) return false;
-            if (dateTo && h.date > dateTo) return false;
-            return true;
-          });
-          if (!hasMuni) return false;
-        }
-
-        if (query) {
-          const nameMatch = p.name && p.name.toLowerCase().includes(query);
-          const storeMatch = p.priceHistory && p.priceHistory.some(h =>
-            (h.store || '').toLowerCase().includes(query) || (h.location || '').toLowerCase().includes(query)
-          );
-          if (!(nameMatch || storeMatch)) return false;
-        }
-
-        return true;
-      });
-
-      DOM.productListEl.innerHTML = '';
-      DOM.productCountEl.textContent = filtered.length;
-
-      filtered.forEach(p => renderProductCard(p, dateFrom, dateTo));
-    }
-
-    function renderProductCard(product, dateFrom, dateTo) {
-      const div = document.createElement('div');
-      div.className = 'mb-3';
-      div.dataset.pid = product.id;
-
-      const ph = (product.priceHistory || []).filter(h => {
-        if (dateFrom && h.date < dateFrom) return false;
-        if (dateTo && h.date > dateTo) return false;
-        return true;
-      });
-
-      const latestHistory = (ph && ph.length) ? ph.slice(-1)[0] : null;
-      const latestDate = latestHistory ? latestHistory.date : '';
-      const bestPricesHtml = renderBestPrices(ph, product);
-
-      div.innerHTML = `
-        <div class="d-flex justify-content-between align-items-start">
-          <div style="flex:1;min-width:0">
-            <div class="d-flex align-items-baseline">
-              <div class="fw-bold me-2">${product.name}</div>
-              <div class="small text-muted">${product.unit || ''}</div>
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>Locally</h4>
+                <a href="#">Home</a>
+                <a href="#">Products</a>
+                <a href="#">About Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Log In / Sign Up</a>
             </div>
-            <div class="small text-muted">Category: <span class="text-dark">${product.category}</span></div>
-            <div class="mt-2">
-              <ul class="best-price-list mb-0">${bestPricesHtml}</ul>
+            <div class="footer-col">
+                <h4>Discover</h4>
+                <a href="#">All Categories</a>
+                <a href="#">Food & Beverages</a>
+                <a href="#">Beauty & Wellness</a>
+                <a href="#">Handmade Crafts</a>
+                <a href="#">Plants & Garden</a>
             </div>
-            <div class="small text-muted">Municipality: <span class="text-dark">${(latestHistory && latestHistory.municipality) || ''}</span></div>
-            <div class="small text-muted">Date: <span class="text-dark">${latestDate}</span></div>
-          </div>
-          <div class="text-end ms-3">
-            <div class="d-flex flex-column align-items-end">
-              <div class="category-top"><span class="tag-badge-sm">${product.category || ''}</span></div>
-              <button class="btn btn-primary-filled btn-sm mt-2 view-button" onclick="event.stopPropagation(); openModal(${product.id})">View</button>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Sell with us</a>
+                <a href="#">Community Guidelines</a>
+                <a href="#">FAQs</a>
+                <a href="#">Privacy & Terms</a>
             </div>
-          </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="#"><i class="fas fa-envelope"></i> hello@locally.ph</a>
+                <a href="#"><i class="fab fa-instagram"></i> @locally.ph</a>
+                <a href="#"><i class="fab fa-facebook"></i> LocallyPH</a>
+            </div>
         </div>
-      `;
-
-      DOM.productListEl.appendChild(div);
-
-      div.addEventListener('click', () => {
-        DOM.productListEl.querySelectorAll('.mb-3').forEach(c => c.classList.remove('selected'));
-        div.classList.add('selected');
-        showProduct(product.id);
-      });
-    }
-
-    function renderBestPrices(history, product) {
-      const pinSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="color:var(--accent);margin-right:8px;vertical-align:middle"><path d="M8 0a6 6 0 0 0-6 6c0 4.5 6 10 6 10s6-5.5 6-10a6 6 0 0 0-6-6zm0 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>';
-
-      if (!history || !history.length) {
-        return `<li class="best-price-item d-flex justify-content-between align-items-center"><div><span class="loc">${pinSvg}<strong>N/A</strong></span></div></li>`;
-      }
-
-      const byStore = {};
-      history.forEach(h => {
-        const key = (h.store || '').trim().toLowerCase() + '||' + (h.location || '').trim().toLowerCase();
-        if (!byStore[key] || new Date(h.date) > new Date(byStore[key].date)) {
-          byStore[key] = { store: h.store || '', price: parseFloat(h.price || 0), location: h.location || '', date: h.date };
-        }
-      });
-
-      const bestList = Object.values(byStore)
-        .sort((a, b) => (a.price - b.price) || (new Date(b.date) - new Date(a.date)))
-        .slice(0, 3);
-
-      return bestList.map(h =>
-        `<li class="best-price-item d-flex justify-content-between align-items-center"><div><span class="loc">${pinSvg}<strong>${h.store}${h.location ? ' — ' + h.location : ''}</strong></span></div><span class="amt"><strong>₱${(h.price || 0).toFixed(2)}</strong></span></li>`
-      ).join('');
-    }
-
-    // ========================================
-    // Chart Rendering
-    // ========================================
-    function showProduct(id) {
-      const product = products.find(x => x.id === id);
-      if (!product) return;
-
-      DOM.selectedTitle.innerHTML = `
-        <div class="d-flex align-items-center gap-2">
-          <div class="d-flex align-items-baseline">
-            <div class="fw-bold" style="font-size:1.15rem">${product.name}</div>
-            <div class="small text-muted ms-2">${product.unit || ''}</div>
-          </div>
-          <div class="tag-badge">${product.category || ''}</div>
+        <div class="copyright">
+            <i class="fas fa-leaf"></i> Discover Local. Support Local. — © 2025 Locally | Empowering local communities with green & gold values
         </div>
-      `;
-
-      const dateFrom = DOM.dateFrom.value;
-      const dateTo = DOM.dateTo.value;
-      const history = (product.priceHistory || []).filter(h => {
-        if (dateFrom && h.date < dateFrom) return false;
-        if (dateTo && h.date > dateTo) return false;
-        return true;
-      });
-
-      if (!history.length) {
-        if (chart) chart.destroy();
-        chart = new Chart(DOM.priceChart, {
-          type: 'line',
-          data: { labels: [], datasets: [] },
-          options: { responsive: true, maintainAspectRatio: false }
-        });
-        return;
-      }
-
-      const dateSet = Array.from(new Set(history.map(h => h.date))).sort();
-      const byStore = {};
-
-      history.forEach(h => {
-        const storeName = (h.store || '').toString().trim();
-        const loc = (h.location || '').toString().trim();
-        const key = (storeName + '||' + loc).toLowerCase();
-        if (!byStore[key]) byStore[key] = { label: storeName || (loc || 'Store'), entries: [] };
-        byStore[key].entries.push({ date: h.date, price: Number(h.price || 0) });
-      });
-
-      const datasets = Object.values(byStore).map((s, idx) => {
-        const data = dateSet.map(d => {
-          const match = s.entries.find(e => e.date === d);
-          return match ? match.price : null;
-        });
-        return {
-          label: s.label || `Store ${idx + 1}`,
-          data,
-          borderColor: CHART_COLORS[idx % CHART_COLORS.length],
-          backgroundColor: CHART_COLORS[idx % CHART_COLORS.length] + '33',
-          tension: 0.2,
-          pointRadius: 4,
-          spanGaps: false
-        };
-      });
-
-      if (chart) chart.destroy();
-      chart = new Chart(DOM.priceChart, {
-        type: 'line',
-        data: { labels: dateSet, datasets },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          layout: { padding: 12 },
-          plugins: { legend: { display: true, position: 'top' } },
-          scales: {
-            y: { beginAtZero: false, title: { display: true, text: 'Price (PHP)' } },
-            x: { ticks: { autoSkip: true, maxRotation: 0 } }
-          }
-        }
-      });
-    }
-
-    // ========================================
-    // Modal Functions
-    // ========================================
-    function openModal(id) {
-      const product = products.find(x => x.id === id);
-      if (!product) return;
-
-      DOM.modalProductName.textContent = `${product.name || ''}${product.unit ? ' ' + product.unit : ''}`;
-      DOM.modalProductCategory.textContent = product.category || '';
-
-      populateModalTable(product);
-
-      const headerMunicipality = (product.priceHistory && product.priceHistory.length)
-        ? product.priceHistory.slice(-1)[0].municipality
-        : '';
-      DOM.modalHeaderMunicipality.textContent = headerMunicipality || '';
-      DOM.modalFloatingCategory.textContent = product.category || '';
-
-      const globalFrom = DOM.dateFrom ? DOM.dateFrom.value : '';
-      const globalTo = DOM.dateTo ? DOM.dateTo.value : '';
-      if (DOM.modalDateFrom) DOM.modalDateFrom.value = globalFrom || '';
-      if (DOM.modalDateTo) DOM.modalDateTo.value = globalTo || '';
-
-      if (DOM.modalDateFrom) DOM.modalDateFrom.onchange = () => populateModalTable(product);
-      if (DOM.modalDateTo) DOM.modalDateTo.onchange = () => populateModalTable(product);
-
-      document.body.classList.add('modal-open');
-      DOM.modalOverlay.classList.add('visible');
-    }
-
-    function populateModalTable(product) {
-      if (!(product.priceHistory && product.priceHistory.length)) {
-        DOM.modalPriceHistoryTable.innerHTML = '';
-        return;
-      }
-
-      const mFrom = DOM.modalDateFrom ? DOM.modalDateFrom.value : '';
-      const mTo = DOM.modalDateTo ? DOM.modalDateTo.value : '';
-      let history = getDateRangeFilter(product.priceHistory.slice(), mFrom, mTo);
-
-      let rows = [];
-      if (mFrom && mTo) {
-        rows = history.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
-      } else if (mFrom && !mTo) {
-        rows = history.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
-      } else {
-        rows = deduplicateByStore(history);
-      }
-
-      DOM.modalPriceHistoryTable.innerHTML = '';
-      rows.forEach(h => {
-        const tr = createTableRow(h.store || product.store || '', h.price, h.date, h.location || product.location || '');
-        DOM.modalPriceHistoryTable.appendChild(tr);
-      });
-    }
-
-    function closeModal() {
-      DOM.modalOverlay.classList.remove('visible');
-      document.body.classList.remove('modal-open');
-    }
-
-    // ========================================
-    // Event Listeners
-    // ========================================
-    const debouncedRender = debounce(renderProducts, 180);
-    DOM.searchBox.addEventListener('input', () => debouncedRender());
-    DOM.categoryFilter.addEventListener('change', renderProducts);
-    DOM.municipalityFilter.addEventListener('change', renderProducts);
-
-    [DOM.dateFrom, DOM.dateTo].forEach(el => {
-      if (el) {
-        el.addEventListener('change', () => {
-          renderProducts();
-          const sel = DOM.productListEl.querySelector('.mb-3.selected');
-          if (sel && sel.dataset && sel.dataset.pid) {
-            showProduct(Number(sel.dataset.pid));
-          } else {
-            const first = DOM.productListEl.querySelector('.mb-3');
-            if (first && first.dataset && first.dataset.pid) {
-              first.classList.add('selected');
-              showProduct(Number(first.dataset.pid));
-            }
-          }
-        });
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // ========================================
-    // Initialization
-    // ========================================
-    loadProducts();
-  </script>
-
-  <?= view('partials/footer') ?>
-
+    </div>
+</footer>
 </body>
 </html>

@@ -1,65 +1,46 @@
 <?php
 
-use CodeIgniter\CLI\CLI;
+// Basic CLI exception output for CodeIgniter.
+$title = $title ?? 'Application Error';
+$exceptionClass = isset($exception) ? $exception::class : 'Error';
+$exceptionCode = isset($exception) ? $exception->getCode() : 0;
+$exceptionMessage = isset($exception) ? $exception->getMessage() : 'Unknown error';
+$exceptionFile = isset($exception) ? $exception->getFile() : 'unknown';
+$exceptionLine = isset($exception) ? $exception->getLine() : 0;
+$trace = $trace ?? [];
 
-// The main Exception
-CLI::write('[' . $exception::class . ']', 'light_gray', 'red');
-CLI::write($message);
-CLI::write('at ' . CLI::color(clean_path($exception->getFile()) . ':' . $exception->getLine(), 'green'));
-CLI::newLine();
-
-$last = $exception;
-
-while ($prevException = $last->getPrevious()) {
-    $last = $prevException;
-
-    CLI::write('  Caused by:');
-    CLI::write('  [' . $prevException::class . ']', 'red');
-    CLI::write('  ' . $prevException->getMessage());
-    CLI::write('  at ' . CLI::color(clean_path($prevException->getFile()) . ':' . $prevException->getLine(), 'green'));
-    CLI::newLine();
-}
-
-// The backtrace
-if (defined('SHOW_DEBUG_BACKTRACE') && SHOW_DEBUG_BACKTRACE) {
-    $backtraces = $last->getTrace();
-
-    if ($backtraces) {
-        CLI::write('Backtrace:', 'green');
+$cleanPath = static function (string $path): string {
+    if (function_exists('clean_path')) {
+        return clean_path($path);
     }
 
-    foreach ($backtraces as $i => $error) {
-        $padFile  = '    '; // 4 spaces
-        $padClass = '       '; // 7 spaces
-        $c        = str_pad($i + 1, 3, ' ', STR_PAD_LEFT);
+    return str_replace('\\', '/', $path);
+};
 
-        if (isset($error['file'])) {
-            $filepath = clean_path($error['file']) . ':' . $error['line'];
+fwrite(STDERR, "{$title}\n");
+fwrite(STDERR, str_repeat('=', strlen($title)) . "\n\n");
 
-            CLI::write($c . $padFile . CLI::color($filepath, 'yellow'));
-        } else {
-            CLI::write($c . $padFile . CLI::color('[internal function]', 'yellow'));
-        }
+fwrite(STDERR, "Exception: " . $exceptionClass);
+if ($exceptionCode) {
+    fwrite(STDERR, " #" . $exceptionCode);
+}
+fwrite(STDERR, "\n");
 
-        $function = '';
+fwrite(STDERR, "Message: " . $exceptionMessage . "\n");
+fwrite(STDERR, "File: " . $cleanPath($exceptionFile) . "\n");
+fwrite(STDERR, "Line: " . $exceptionLine . "\n\n");
 
-        if (isset($error['class'])) {
-            $type = ($error['type'] === '->') ? '()' . $error['type'] : $error['type'];
-            $function .= $padClass . $error['class'] . $type . $error['function'];
-        } elseif (! isset($error['class']) && isset($error['function'])) {
-            $function .= $padClass . $error['function'];
-        }
+if (! empty($trace) && is_array($trace)) {
+    fwrite(STDERR, "Stack trace:\n");
+    foreach ($trace as $index => $row) {
+        $location = isset($row['file'], $row['line'])
+            ? $cleanPath($row['file']) . ':' . $row['line']
+            : '{internal function}';
 
-        $args = implode(', ', array_map(static fn ($value): string => match (true) {
-            is_object($value) => 'Object(' . $value::class . ')',
-            is_array($value)  => $value !== [] ? '[...]' : '[]',
-            $value === null   => 'null', // return the lowercased version
-            default           => var_export($value, true),
-        }, array_values($error['args'] ?? [])));
+        $function = isset($row['class'], $row['type'], $row['function'])
+            ? $row['class'] . $row['type'] . $row['function']
+            : ($row['function'] ?? '{closure}');
 
-        $function .= '(' . $args . ')';
-
-        CLI::write($function);
-        CLI::newLine();
+        fwrite(STDERR, sprintf("  #%d %s(): %s\n", $index, $function, $location));
     }
 }

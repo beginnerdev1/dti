@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class StoreModel extends Model
 {
-    protected $table = 'store';
+    protected $table = 'carp_shops';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields = ['name', 'municipality', 'location'];
-    protected $useTimestamps = false;
+    protected $allowedFields = ['name', 'type', 'location', 'contact_number', 'description', 'tags', 'status'];
+    protected $useTimestamps = true;
 
     /**
      * Validate and insert a store record.
@@ -20,7 +20,7 @@ class StoreModel extends Model
      */
     public function saveStore(array $data)
     {
-        if (empty($data['name']) || empty($data['location']) || empty($data['municipality'])) {
+        if (empty($data['name']) || empty($data['location']) || empty($data['type'])) {
             return false;
         }
 
@@ -31,12 +31,20 @@ class StoreModel extends Model
             }
         }
 
+        // Set default status if not provided
+        if (!isset($safe['status'])) {
+            $safe['status'] = 'pending';
+        }
+
         try {
             $id = $this->insert($safe);
+            if ($id === false) {
+                log_message('error', 'StoreModel insert failed. Errors: ' . json_encode($this->errors()));
+            }
             return $id ? (int)$id : false;
         } catch (\Exception $e) {
+            log_message('error', 'StoreModel exception: ' . $e->getMessage());
             return false;
-        
         }
     }
 }
