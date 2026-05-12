@@ -8,298 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Chart.js CDN for simple analytics -->
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/admin.css') ?>">
+    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #F8F7F2;
-            color: #0B3D2E;
-            line-height: 1.5;
-        }
-
-        :root {
-            --green-deep: #06281C;
-            --green-primary: #0B3D2E;
-            --green-soft: #146B4D;
-            --green-light: #EAF4EE;
-            --gold-main: #D4AF37;
-            --gold-dark: #9C7412;
-            --gold-soft: #F8E7A8;
-            --gold-pale: #FFF7D6;
-            --white: #FFFFFF;
-            --cream-bg: #F8F7F2;
-            --neutral-gray: #667085;
-            --admin-bg: #F8F7F2;
-            --card-white: #FFFFFF;
-            --shadow-sm: 0 10px 30px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
-            --shadow-md: 0 25px 45px rgba(0,0,0,0.12);
-            --border-radius-card: 1.6rem;
-        }
-
-        .admin-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* SIDEBAR */
-        .sidebar {
-            width: 280px;
-            background: linear-gradient(135deg, #06281C 0%, #0B3D2E 100%);
-            color: #e2dccd;
-            flex-shrink: 0;
-            transition: all 0.3s;
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-        }
-
-        .sidebar-header {
-            padding: 1.8rem 1.5rem;
-            border-bottom: 1px solid rgba(212,175,55,0.3);
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #FFF7D6, var(--gold-main));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .sidebar-header p {
-            font-size: 0.7rem;
-            opacity: 0.7;
-            margin-top: 4px;
-        }
-
-        .nav-menu {
-            padding: 1.5rem 0;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 0.9rem 1.8rem;
-            margin: 4px 12px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-weight: 500;
-            color: #ddd2b6;
-        }
-
-        .nav-item i {
-            width: 24px;
-            font-size: 1.2rem;
-        }
-
-        .nav-item.active, .nav-item:hover {
-            background: var(--gold-main);
-            color: var(--green-deep);
-        }
-
-        /* MAIN CONTENT */
-        .main-content {
-            flex: 1;
-            padding: 1.8rem 2rem;
-            overflow-x: auto;
-        }
-
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .page-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            border-left: 5px solid var(--gold-main);
-            padding-left: 1rem;
-        }
-
-        .admin-badge {
-            background: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        /* Stats Cards */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: var(--card-white);
-            border-radius: 1.6rem;
-            padding: 1.2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(212,175,55,0.18);
-        }
-
-        .stat-info h4 {
-            font-size: 0.85rem;
-            color: #6C7A68;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--green-primary);
-        }
-
-        .stat-icon {
-            font-size: 2.5rem;
-            color: var(--gold-main);
-        }
-
-        /* Tables & Cards */
-        .admin-card {
-            background: white;
-            border-radius: 1.6rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(212,175,55,0.18);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.2rem;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--green-primary);
-            color: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            border: none;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-primary:hover {
-            background: var(--gold-dark);
-            color: var(--green-deep);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--gold-main);
-            border-radius: 40px;
-            padding: 0.4rem 1rem;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 0.9rem 0.5rem;
-            border-bottom: 1px solid rgba(212,175,55,0.2);
-        }
-
-        th {
-            font-weight: 600;
-            color: var(--green-deep);
-        }
-
-        .status-badge {
-            background: var(--green-light);
-            padding: 4px 10px;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 600;
-        }
-
-        .action-icons i {
-            margin: 0 6px;
-            cursor: pointer;
-            color: var(--gold-dark);
-            transition: 0.2s;
-        }
-
-        .action-icons i:hover {
-            color: var(--green-deep);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            width: 90%;
-            max-width: 500px;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        .modal-content h3 {
-            margin-bottom: 1rem;
-        }
-
-        .modal-content input, .modal-content select, .modal-content textarea {
-            width: 100%;
-            padding: 0.7rem;
-            margin: 0.5rem 0 1rem;
-            border: 1px solid rgba(212,175,55,0.2);
-            border-radius: 20px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        @media (max-width: 780px) {
-            .sidebar { width: 80px; }
-            .sidebar-header h2, .sidebar-header p, .nav-item span { display: none; }
-            .nav-item { justify-content: center; padding: 0.9rem; }
-            .main-content { padding: 1rem; }
-        }
+        .image-preview { max-width: 60px; max-height: 60px; border-radius: 8px; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -326,7 +40,7 @@
             <div class="admin-badge"><i class="fas fa-user-shield"></i> CARP Program Manager <i class="fas fa-chevron-down"></i></div>
         </div>
 
-        <!-- Dashboard Tab (default) -->
+        <!-- Dashboard Tab -->
         <div id="dashboardTab" class="tab-content">
             <div class="stats-grid">
                 <div class="stat-card"><div class="stat-info"><h4>Total Shops</h4><div class="stat-number" id="totalShopsStat">0</div></div><i class="fas fa-store stat-icon"></i></div>
@@ -349,20 +63,33 @@
         <div id="shopsTab" class="tab-content" style="display: none;">
             <div class="admin-card">
                 <div class="card-header"><h3><i class="fas fa-store"></i> All Registered Shops (CARPreneurs)</h3><button class="btn-primary" id="addShopBtn"><i class="fas fa-plus"></i> Add Shop</button></div>
-                <div style="overflow-x: auto;"><table id="shopsTable"><thead><tr><th>Shop Name</th><th>Type</th><th>Location</th><th>Products</th><th>Status</th><th>Actions</th></tr></thead><tbody id="shopsTableBody"></tbody></table></div>
+                <div style="overflow-x: auto;">
+                    <table id="shopsTable">
+                        <thead><tr><th>Image</th><th>Shop Name</th><th>Type</th><th>Location</th><th>Products</th><th>Status</th><th>Actions</th></tr></thead>
+                        <tbody id="shopsTableBody"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!-- Products Tab -->
         <div id="productsTab" class="tab-content" style="display: none;">
-            <div class="admin-card"><div class="card-header"><h3><i class="fas fa-box"></i> Product Inventory</h3><button class="btn-primary" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button></div>
-            <table><thead><tr><th>Product Name</th><th>Shop</th><th>Price</th><th>Category</th><th>Actions</th></tr></thead><tbody id="productsTableBody"></tbody></table></div>
+            <div class="admin-card">
+                <div class="card-header"><h3><i class="fas fa-box"></i> Product Inventory</h3><button class="btn-primary" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button></div>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead><tr><th>Image</th><th>Product Name</th><th>Shop</th><th>Price</th><th>Category</th><th>Actions</th></tr></thead>
+                        <tbody id="productsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
-        <!-- Registrations Tab (shop applications) -->
+        <!-- Registrations Tab -->
         <div id="registrationsTab" class="tab-content" style="display: none;">
             <div class="admin-card"><h3><i class="fas fa-user-check"></i> Pending & Approved Registrations</h3>
-            <table><thead><tr><th>Applicant / Coop</th><th>Type</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="registrationsTableBody"></tbody></table></div>
+                <table><thead><tr><th>Applicant / Coop</th><th>Type</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="registrationsTableBody"></tbody></table>
+            </div>
         </div>
 
         <!-- Analytics Tab -->
@@ -373,124 +100,158 @@
     </div>
 </div>
 
-<!-- Add/Edit Shop Modal -->
+<!-- ========== SHOP MODAL (file upload) ========== -->
 <div id="shopModal" class="modal">
     <div class="modal-content">
-
         <h3 id="modalTitle">Add New Shop</h3>
+        <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>" id="csrfToken">
 
-        <input type="hidden"
-               name="csrf_token"
-               value="<?= csrf_token() ?>"
-               id="csrfToken">
-
-        <!-- Shop Name -->
-        <input type="text"
-               id="shopName"
-               placeholder="Shop / Cooperative / ARB Group Name">
-
-        <!-- Type -->
+        <input type="text" id="shopName" placeholder="Shop / Cooperative / ARB Group Name">
         <select id="shopType">
             <option value="cooperative">Cooperative</option>
             <option value="arb">ARB Group</option>
-            <option value="shop">Shop</option>
+            <option value="individual">Individual</option>
         </select>
-
-        <!-- Location -->
-        <input type="text"
-               id="shopLocation"
-               placeholder="Barangay, Municipality, Aurora">
-
-        <!-- Contact Number -->
-        <input type="text"
-               id="shopContact"
-               placeholder="Phone or Mobile Number">
-
-        <!-- Description -->
-        <textarea id="shopDescription"
-                  placeholder="Shop Description"
-                  rows="4"></textarea>
-
-        <!-- Tags -->
-        <input type="text"
-               id="shopTags"
-               placeholder="Comma-separated keywords (e.g. Coconut, Organic)">
-
-        <!-- Buttons -->
+        <input type="text" id="shopLocation" placeholder="Barangay, Municipality, Aurora">
+        <input type="text" id="shopContact" placeholder="Phone or Mobile Number">
+        <textarea id="shopDescription" placeholder="Shop Description" rows="4"></textarea>
+        <label style="display:block; margin-top:0.5rem; font-weight:600; color:#0B3D2E;">Shop Image</label>
+        <input type="file" id="shopImage" accept="image/*">
+        <small style="color:#667085;">Leave empty to keep current image when editing.</small>
+        <input type="text" id="shopTags" placeholder="Comma-separated keywords (e.g. Coconut, Organic)">
+        
         <div style="display:flex; gap:10px; margin-top:15px;">
-
-            <button class="btn-primary" id="saveShopBtn">
-                Save Shop
-            </button>
-
-            <button class="btn-outline"
-                    id="closeModalBtn">
-                Cancel
-            </button>
-
+            <button class="btn-primary" id="saveShopBtn">Save Shop</button>
+            <button class="btn-outline" id="closeModalBtn">Cancel</button>
         </div>
-
     </div>
 </div>
 
-<!-- Add/Edit Product Modal -->
-<div id="productModal" class="modal"><div class="modal-content"><h3 id="productModalTitle">Add Product</h3><input type="text" id="productName" placeholder="Product Name"><select id="productShopSelect"></select><input type="number" id="productPrice" placeholder="Price (₱)"><select id="productCategory"><option value="agri">Agricultural</option><option value="handicraft">Handicraft</option></select><button class="btn-primary" id="saveProductBtn">Save</button><button class="btn-outline" id="closeProductModalBtn">Cancel</button></div></div>
+<!-- ========== PRODUCT MODAL (no slug/stock; brochure fields) ========== -->
+<div id="productModal" class="modal">
+    <div class="modal-content" style="max-width:600px;">
+        <h3 id="productModalTitle">Add Product</h3>
+        <input type="text" id="productName" placeholder="Product Name">
+        <select id="productShopSelect"></select>
+        <input type="number" id="productPrice" placeholder="Price (₱)" step="0.01">
+        <select id="productCategory">
+            <option value="agri">Agricultural</option>
+            <option value="handicraft">Handicraft</option>
+            <option value="food">Food & Beverages</option>
+        </select>
+        <textarea id="productDescription" placeholder="Detailed product description..." rows="3"></textarea>
+        <label style="display:block; margin-top:0.5rem; font-weight:600; color:#0B3D2E;">Product Image</label>
+        <input type="file" id="productImage" accept="image/*">
+        <small style="color:#667085;">Leave empty to keep current image when editing.</small>
+        <input type="text" id="productTags" placeholder="Comma-separated tags">
+        <div style="display:flex; gap:10px; margin-top:15px;">
+            <button class="btn-primary" id="saveProductBtn">Save Product</button>
+            <button class="btn-outline" id="closeProductModalBtn">Cancel</button>
+        </div>
+    </div>
+</div>
 
 <script>
-     const BASE_URL = "<?= base_url() ?>";
-    // Initialize chart variables
+    const BASE_URL = "<?= base_url() ?>";
     window.dashChart = null;
     window.growthChart = null;
-    // ---------- DATA MODELS ----------
+
+    // ---------- DATA ----------
     let shops = [];
-    let products = [
-        { id: 101, name: "Pure Raw Honey", shopId: 1, price: 250, category: "agri" },
-        { id: 102, name: "Handwoven Abaca Bag", shopId: 2, price: 150, category: "handicraft" },
-        { id: 103, name: "Organic Coconut Soap", shopId: 3, price: 120, category: "agri" },
-        { id: 104, name: "Herbal Wellness Tea", shopId: 4, price: 150, category: "agri" },
-        { id: 105, name: "Macrame Wall Hanging", shopId: 5, price: 210, category: "handicraft" },
-    ];
-    let registrations = [
-        { id: 201, name: "Aurora Honey Bee Coop", type: "cooperative", location: "Maria Aurora", status: "pending" },
-        { id: 202, name: "Baler Basket Weavers", type: "arb", location: "Baler", status: "pending" },
-        { id: 203, name: "Dipping Lagoon Coffee", type: "cooperative", location: "Dipaculao", status: "approved" },
-    ];
+    let products = [];
+    let registrations = [];
 
-    // Helper: update stats counts
-    function updateStats() {
-        document.getElementById("totalShopsStat").innerText = shops.length;
-        document.getElementById("totalProductsStat").innerText = products.length;
-        document.getElementById("pendingRegsStat").innerText = registrations.filter(r => r.status === "pending").length;
-        document.getElementById("coopStat").innerText = shops.filter(s => s.type === "cooperative").length;
-    }
-
+    // ---------- LOAD FROM SERVER (aligned with controller that returns [] on error) ----------
     async function loadShops() {
         try {
-            const response = await fetch(`${BASE_URL}/admin/get-shops`);
-            const data = await response.json();
-            shops = data.map(shop => ({
+            const res = await fetch(`${BASE_URL}admin/get-shops`);
+            const data = await res.json();
+            // data is an array (empty on error)
+            shops = (Array.isArray(data) ? data : []).map(shop => ({
                 id: shop.id,
                 name: shop.name,
                 type: shop.type,
                 location: shop.location,
-                productsCount: 0, // TODO: calculate from products
-                status: shop.status,
-                tags: shop.tags || ''
+                contact_number: shop.contact_number || '',
+                description: shop.description || '',
+                image: shop.image || '',
+                tags: shop.tags || '',
+                status: shop.status || 'pending',
+                productsCount: shop.products_count || 0
             }));
-        } catch (error) {
-            console.error('Error loading shops:', error);
+        } catch (e) {
+            console.error('Load shops failed', e);
+            shops = [];
         }
     }
 
+    async function loadProducts() {
+        try {
+            const res = await fetch(`${BASE_URL}admin/get-products`);
+            const data = await res.json();
+            // data is an array (empty on error)
+            products = (Array.isArray(data) ? data : []).map(p => ({
+                id: p.id,
+                name: p.name,
+                shopId: p.carp_shop_id,
+                shopName: p.shop_name || 'Unknown',
+                price: p.price,
+                category: p.category,
+                description: p.description || '',
+                image: p.image || '',
+                tags: p.tags || '',
+                status: p.status || 'active'
+            }));
+        } catch (e) {
+            console.error('Load products failed', e);
+            products = [];
+        }
+    }
+
+    async function loadRegistrations() {
+        try {
+            const res = await fetch(`${BASE_URL}admin/get-registrations`);
+            const data = await res.json();
+            // data is an array (empty on error)
+            registrations = Array.isArray(data) ? data : [];
+        } catch (e) {
+            console.error('Load registrations failed', e);
+            registrations = [];
+        }
+    }
+
+    // ---------- STATS (safe against non‑arrays) ----------
+    function updateStats() {
+        const s = Array.isArray(shops) ? shops : [];
+        const p = Array.isArray(products) ? products : [];
+        const r = Array.isArray(registrations) ? registrations : [];
+
+        document.getElementById("totalShopsStat").innerText = s.length;
+        document.getElementById("totalProductsStat").innerText = p.length;
+        document.getElementById("pendingRegsStat").innerText = r.filter(reg => reg.status === "pending").length;
+        document.getElementById("coopStat").innerText = s.filter(shop => shop.type === "cooperative").length;
+    }
+
+    // ---------- RENDER TABLES ----------
     function renderShopsTable() {
         const tbody = document.getElementById("shopsTableBody");
-        tbody.innerHTML = shops.map(shop => {
+        const s = Array.isArray(shops) ? shops : [];
+        tbody.innerHTML = s.map(shop => {
             const statusDisplay = shop.status === 'active' ? 'Active' : shop.status === 'pending' ? 'Pending' : 'Inactive';
+            const imgHtml = shop.image ? `<img src="${BASE_URL}${shop.image}" class="image-preview" onerror="this.style.display='none'">` : '<i class="fas fa-image"></i>';
+            const typeLabel = shop.type === 'cooperative' ? 'Cooperative' : shop.type === 'arb' ? 'ARB Group' : 'Individual';
             return `
                 <tr>
-                    <td>${shop.name}</td><td>${shop.type === "cooperative" ? "Cooperative" : "ARB Group"}</td><td>${shop.location}</td><td>${shop.productsCount || 0}</td>
+                    <td>${imgHtml}</td>
+                    <td>${shop.name}</td>
+                    <td>${typeLabel}</td>
+                    <td>${shop.location}</td>
+                    <td>${shop.productsCount || 0}</td>
                     <td><span class="status-badge">${statusDisplay}</span></td>
-                    <td class="action-icons"><i class="fas fa-edit" onclick="editShop(${shop.id})"></i><i class="fas fa-trash-alt" onclick="deleteShop(${shop.id})"></i></td>
+                    <td class="action-icons">
+                        <i class="fas fa-edit" onclick="editShop(${shop.id})"></i>
+                        <i class="fas fa-trash-alt" onclick="deleteShop(${shop.id})"></i>
+                    </td>
                 </tr>
             `;
         }).join("");
@@ -498,192 +259,314 @@
 
     function renderProductsTable() {
         const tbody = document.getElementById("productsTableBody");
-        tbody.innerHTML = products.map(prod => {
-            const shopName = shops.find(s => s.id === prod.shopId)?.name || "Unknown";
-            return `<tr><td>${prod.name}</td><td>${shopName}</td><td>₱${prod.price}</td><td>${prod.category}</td>
-            <td class="action-icons"><i class="fas fa-edit" onclick="editProduct(${prod.id})"></i><i class="fas fa-trash-alt" onclick="deleteProduct(${prod.id})"></i></td></tr>`;
+        const p = Array.isArray(products) ? products : [];
+        tbody.innerHTML = p.map(prod => {
+            const imgHtml = prod.image ? `<img src="${BASE_URL}${prod.image}" class="image-preview" onerror="this.style.display='none'">` : '<i class="fas fa-image"></i>';
+            return `
+                <tr>
+                    <td>${imgHtml}</td>
+                    <td>${prod.name}</td>
+                    <td>${prod.shopName}</td>
+                    <td>₱${parseFloat(prod.price).toFixed(2)}</td>
+                    <td>${prod.category}</td>
+                    <td class="action-icons">
+                        <i class="fas fa-edit" onclick="editProduct(${prod.id})"></i>
+                        <i class="fas fa-trash-alt" onclick="deleteProduct(${prod.id})"></i>
+                    </td>
+                </tr>
+            `;
         }).join("");
     }
 
     function renderRegistrations() {
         const tbody = document.getElementById("registrationsTableBody");
-        tbody.innerHTML = registrations.map(reg => `
-            <tr><td>${reg.name}</td><td>${reg.type}</td><td>${reg.location}</td><td><span class="status-badge">${reg.status}</span></td>
-            <td class="action-icons">${reg.status === "pending" ? `<i class="fas fa-check-circle" onclick="approveReg(${reg.id})" style="color:green;"></i> <i class="fas fa-times-circle" onclick="rejectReg(${reg.id})" style="color:red;"></i>` : `-`}</td></tr>
+        const r = Array.isArray(registrations) ? registrations : [];
+        tbody.innerHTML = r.map(reg => `
+            <tr>
+                <td>${reg.name}</td>
+                <td>${reg.type}</td>
+                <td>${reg.location}</td>
+                <td><span class="status-badge">${reg.status}</span></td>
+                <td class="action-icons">
+                    ${reg.status === "pending" ? `
+                        <i class="fas fa-check-circle" onclick="approveReg(${reg.id})" style="color:green;"></i>
+                        <i class="fas fa-times-circle" onclick="rejectReg(${reg.id})" style="color:red;"></i>
+                    ` : '-'}
+                </td>
+            </tr>
         `).join("");
     }
 
+    // ---------- SHOP CRUD (with file upload) ----------
     window.editShop = (id) => {
-        const shop = shops.find(s => s.id === id);
+        const shop = shops.find(s => s.id == id);
+        if (!shop) return alert("Shop not found.");
         document.getElementById("modalTitle").innerText = "Edit Shop";
-        document.getElementById("shopName").value = shop.name;
-        document.getElementById("shopType").value = shop.type;
-        document.getElementById("shopLocation").value = shop.location;
-        document.getElementById("shopTags").value = shop.tags;
+        document.getElementById("shopName").value = shop.name || "";
+        document.getElementById("shopType").value = shop.type || "cooperative";
+        document.getElementById("shopLocation").value = shop.location || "";
+        document.getElementById("shopContact").value = shop.contact_number || "";
+        document.getElementById("shopDescription").value = shop.description || "";
+        document.getElementById("shopImage").value = ''; // reset file input
+        document.getElementById("shopTags").value = shop.tags || "";
         window.currentEditShopId = id;
         document.getElementById("shopModal").style.display = "flex";
     };
-    window.deleteShop = (id) => { if(confirm("Delete shop?")) { shops = shops.filter(s => s.id !== id); products = products.filter(p => p.shopId !== id); updateStats(); renderShopsTable(); renderProductsTable(); renderDashboardChart(); } };
+
+    window.deleteShop = async (id) => {
+        if (!confirm("Delete this shop?")) return;
+        const res = await fetch(`${BASE_URL}admin/delete-shop`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+            body: new URLSearchParams({ id, csrf_token: document.getElementById("csrfToken").value })
+        });
+        const result = await res.json();
+        if (result.success) {
+            shops = shops.filter(s => s.id != id);
+            products = products.filter(p => p.shopId != id);
+            updateStats(); renderShopsTable(); renderProductsTable(); renderDashboardChart();
+            alert("Shop deleted.");
+        } else alert("Failed: " + (result.message || ''));
+    };
+
+    document.getElementById("saveShopBtn").onclick = async () => {
+        const name = document.getElementById("shopName").value.trim();
+        const type = document.getElementById("shopType").value;
+        const location = document.getElementById("shopLocation").value.trim();
+        const contact_number = document.getElementById("shopContact").value.trim();
+        const description = document.getElementById("shopDescription").value.trim();
+        const tags = document.getElementById("shopTags").value.trim();
+        const imageFile = document.getElementById("shopImage").files[0];
+
+        if (!name || !location) return alert("Name and location required.");
+
+        const editId = window.currentEditShopId;
+        const url = editId ? `${BASE_URL}admin/edit-shop` : `${BASE_URL}admin/add-shop`;
+
+        const formData = new FormData();
+        formData.append('id', editId || '');
+        formData.append('name', name);
+        formData.append('type', type);
+        formData.append('location', location);
+        formData.append('contact_number', contact_number);
+        formData.append('description', description);
+        formData.append('tags', tags);
+        formData.append('csrf_token', document.getElementById("csrfToken").value);
+        if (imageFile) formData.append('image', imageFile);
+
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                body: formData
+            });
+            const result = await res.json();
+            if (result.success) {
+                await loadShops(); // refresh shops with new image path
+                updateStats(); renderShopsTable(); renderDashboardChart();
+                closeModals();
+                document.getElementById("shopName").value = '';
+                document.getElementById("shopImage").value = ''; // clear file input
+            } else alert("Failed: " + (result.message || ''));
+        } catch (e) { console.error(e); alert("Error saving shop."); }
+    };
+
+    // ---------- PRODUCT CRUD (with file upload) ----------
     window.editProduct = (id) => {
-        const prod = products.find(p => p.id === id);
+        const prod = products.find(p => p.id == id);
+        if (!prod) return alert("Product not found.");
+
+        // 1. Populate the shop dropdown with all shops
+        const shopSelect = document.getElementById("productShopSelect");
+        shopSelect.innerHTML = shops.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
+
+        // 2. Set form fields (no slug/stock)
         document.getElementById("productModalTitle").innerText = "Edit Product";
         document.getElementById("productName").value = prod.name;
         document.getElementById("productPrice").value = prod.price;
         document.getElementById("productCategory").value = prod.category;
-        document.getElementById("productShopSelect").value = prod.shopId;
+        shopSelect.value = prod.shopId;
+        document.getElementById("productDescription").value = prod.description || '';
+        document.getElementById("productImage").value = '';   // reset file input
+        document.getElementById("productTags").value = prod.tags || '';
         window.currentEditProductId = id;
         document.getElementById("productModal").style.display = "flex";
     };
-    window.deleteProduct = (id) => { if(confirm("Delete product?")) { products = products.filter(p => p.id !== id); updateStats(); renderProductsTable(); renderDashboardChart(); } };
-    window.approveReg = (id) => { let reg = registrations.find(r => r.id === id); if(reg) { reg.status = "approved"; alert("Registration approved! Shop added."); const newShop = { id: Date.now(), name: reg.name, type: reg.type, location: reg.location, productsCount: 0, status: "approved", tags: "" }; shops.push(newShop); updateStats(); renderShopsTable(); renderRegistrations(); renderDashboardChart(); } };
-    window.rejectReg = (id) => { registrations = registrations.filter(r => r.id !== id); renderRegistrations(); updateStats(); };
 
-document.getElementById("saveShopBtn").onclick = async () => {
-
-    const name = document.getElementById("shopName").value.trim();
-
-    const type = document.getElementById("shopType").value;
-
-    const location = document.getElementById("shopLocation").value.trim();
-
-    const contact_number = document.getElementById("shopContact").value.trim();
-
-    const description = document.getElementById("shopDescription").value.trim();
-
-    const tags = document.getElementById("shopTags").value.trim();
-
-    const csrfToken = document.getElementById("csrfToken").value;
-
-    if (!name || !location) {
-
-        alert("Shop name and location are required.");
-
-        return;
-
-    }
-
-    try {
-
-        const response = await fetch(BASE_URL + 'admin/add-shop', {
-
+    window.deleteProduct = async (id) => {
+        if (!confirm("Delete product?")) return;
+        const res = await fetch(`${BASE_URL}admin/delete-product`, {
             method: 'POST',
-
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-
-            body: new URLSearchParams({
-
-                name,
-                type,
-                location,
-                contact_number,
-                description,
-                tags,
-                csrf_token: csrfToken
-
-            })
-
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+            body: new URLSearchParams({ id, csrf_token: document.getElementById("csrfToken").value })
         });
-
-        const result = await response.json();
-
+        const result = await res.json();
         if (result.success) {
+            products = products.filter(p => p.id != id);
+            updateStats(); renderProductsTable(); renderDashboardChart();
+            alert("Product deleted.");
+        } else alert("Failed: " + (result.message || ''));
+    };
 
-            const newShop = {
-
-                id: result.id,
-                name,
-                type,
-                location,
-                contact_number,
-                description,
-                productsCount: 0,
-                tags
-
-            };
-
-            shops.push(newShop);
-
-            updateStats();
-
-            renderShopsTable();
-
-            renderDashboardChart();
-
-            document.getElementById("shopModal").style.display = "none";
-
-            alert("Shop added successfully!");
-
-            // CLEAR FORM
-
-            document.getElementById("shopName").value = "";
-
-            document.getElementById("shopLocation").value = "";
-
-            document.getElementById("shopContact").value = "";
-
-            document.getElementById("shopDescription").value = "";
-
-            document.getElementById("shopTags").value = "";
-
-        } else {
-
-            alert("Failed to add shop: " + result.message);
-
-        }
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert("An error occurred while adding the shop.");
-
-    }
-
-};
-    document.getElementById("saveProductBtn").onclick = () => {
-        const name = document.getElementById("productName").value;
+    document.getElementById("saveProductBtn").onclick = async () => {
+        const name = document.getElementById("productName").value.trim();
         const price = parseFloat(document.getElementById("productPrice").value);
         const category = document.getElementById("productCategory").value;
         const shopId = parseInt(document.getElementById("productShopSelect").value);
-        if(window.currentEditProductId){
-            const idx = products.findIndex(p => p.id === window.currentEditProductId);
-            if(idx !== -1) products[idx] = { ...products[idx], name, price, category, shopId };
-            window.currentEditProductId = null;
-        } else {
-            products.push({ id: Date.now(), name, price, category, shopId });
-        }
-        updateStats(); renderProductsTable(); renderDashboardChart();
-        document.getElementById("productModal").style.display = "none";
+        const description = document.getElementById("productDescription").value.trim();
+        const tags = document.getElementById("productTags").value.trim();
+        const imageFile = document.getElementById("productImage").files[0];
+
+        if (!name || isNaN(price) || !shopId) return alert("Name, price, and shop required.");
+
+        const editId = window.currentEditProductId;
+        const url = editId ? `${BASE_URL}admin/edit-product` : `${BASE_URL}admin/add-product`;
+
+        const formData = new FormData();
+        formData.append('id', editId || '');
+        formData.append('carp_shop_id', shopId);
+        formData.append('name', name);
+        formData.append('price', price);
+        formData.append('category', category);
+        formData.append('description', description);
+        formData.append('tags', tags);
+        formData.append('csrf_token', document.getElementById("csrfToken").value);
+        if (imageFile) formData.append('image', imageFile);
+
+        try {
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                body: formData
+            });
+            const result = await res.json();
+            if (result.success) {
+                await loadProducts();
+                updateStats(); renderProductsTable(); renderDashboardChart();
+                document.getElementById("productModal").style.display = "none";
+                document.getElementById("productImage").value = ''; // clear file
+            } else alert("Failed: " + (result.message || ''));
+        } catch (e) { console.error(e); alert("Error saving product."); }
     };
-    function closeModals(){ document.getElementById("shopModal").style.display = "none"; document.getElementById("productModal").style.display = "none"; }
+
+    // ---------- REGISTRATIONS ----------
+    window.approveReg = async (id) => {
+        const res = await fetch(`${BASE_URL}admin/approve-registration`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+            body: new URLSearchParams({ id, csrf_token: document.getElementById("csrfToken").value })
+        });
+        const result = await res.json();
+        if (result.success) {
+            alert("Registration approved! Shop created.");
+            await loadShops();
+            await loadRegistrations();
+            updateStats(); renderShopsTable(); renderRegistrations(); renderDashboardChart();
+        } else alert("Failed.");
+    };
+
+    window.rejectReg = async (id) => {
+        const res = await fetch(`${BASE_URL}admin/reject-registration`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
+            body: new URLSearchParams({ id, csrf_token: document.getElementById("csrfToken").value })
+        });
+        const result = await res.json();
+        if (result.success) {
+            registrations = registrations.filter(r => r.id != id);
+            renderRegistrations(); updateStats();
+        } else alert("Failed.");
+    };
+
+    // ---------- MODALS ----------
+    function closeModals() {
+        document.getElementById("shopModal").style.display = "none";
+        document.getElementById("productModal").style.display = "none";
+    }
     document.getElementById("closeModalBtn").onclick = closeModals;
     document.getElementById("closeProductModalBtn").onclick = closeModals;
-    document.getElementById("addShopBtn").onclick = () => { window.currentEditShopId = null; document.getElementById("modalTitle").innerText = "Add New Shop"; document.getElementById("shopName").value = ""; document.getElementById("shopModal").style.display = "flex"; };
-    document.getElementById("addProductBtn").onclick = () => { 
+
+    document.getElementById("addShopBtn").onclick = () => {
+        window.currentEditShopId = null;
+        document.getElementById("modalTitle").innerText = "Add New Shop";
+        document.getElementById("shopName").value = '';
+        document.getElementById("shopImage").value = ''; // clear file
+        document.getElementById("shopModal").style.display = "flex";
+    };
+
+    document.getElementById("addProductBtn").onclick = () => {
         window.currentEditProductId = null;
         document.getElementById("productModalTitle").innerText = "Add Product";
-        document.getElementById("productName").value = "";
+        document.getElementById("productName").value = '';
+        document.getElementById("productPrice").value = '';
+        document.getElementById("productDescription").value = '';
+        document.getElementById("productImage").value = ''; // clear file
+        document.getElementById("productTags").value = '';
         const shopSelect = document.getElementById("productShopSelect");
         shopSelect.innerHTML = shops.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
         document.getElementById("productModal").style.display = "flex";
     };
+
+    // ---------- CHARTS ----------
     function renderDashboardChart() {
         const ctx = document.getElementById("dashboardChart")?.getContext("2d");
-        if(ctx && window.dashChart) window.dashChart.destroy();
-        if(ctx) { window.dashChart = new Chart(ctx, { type: 'bar', data: { labels: ['Shops', 'Products', 'Pending Regs'], datasets: [{ label: 'Count', data: [shops.length, products.length, registrations.filter(r=>r.status==='pending').length], backgroundColor: '#C9A03D' }] } }); }
-    }
-    function renderGrowthAnalytics() {
-        const ctx = document.getElementById("growthChart")?.getContext("2d");
-        if(ctx && window.growthChart) window.growthChart.destroy();
-        if(ctx) { new Chart(ctx, { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'], datasets: [{ label: 'Shops Growth', data: [4,7,9,12, shops.length], borderColor: '#2C5E3F', tension: 0.3 }] } }); }
-        const catCtx = document.getElementById("categoryChart")?.getContext("2d");
-        if(catCtx) { new Chart(catCtx, { type: 'doughnut', data: { labels: ['Agri Products', 'Handicraft'], datasets: [{ data: [products.filter(p=>p.category==='agri').length, products.filter(p=>p.category==='handicraft').length], backgroundColor: ['#C9A03D', '#2C5E3F'] }] } }); }
+        if (ctx && window.dashChart) window.dashChart.destroy();
+        if (ctx) {
+            window.dashChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Shops', 'Products', 'Pending'],
+                    datasets: [{
+                        label: 'Count',
+                        data: [
+                            shops.length,
+                            products.length,
+                            registrations.filter(r => r.status === 'pending').length
+                        ],
+                        backgroundColor: '#C9A03D'
+                    }]
+                }
+            });
+        }
     }
 
-    // Tab switching
+    function renderGrowthAnalytics() {
+        const ctx = document.getElementById("growthChart")?.getContext("2d");
+        if (ctx && window.growthChart) window.growthChart.destroy();
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Shops Growth',
+                        data: [4, 7, 9, 12, shops.length],
+                        borderColor: '#2C5E3F',
+                        tension: 0.3
+                    }]
+                }
+            });
+        }
+        const catCtx = document.getElementById("categoryChart")?.getContext("2d");
+        if (catCtx) {
+            new Chart(catCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Agri', 'Handicraft', 'Food'],
+                    datasets: [{
+                        data: [
+                            products.filter(p => p.category === 'agri').length,
+                            products.filter(p => p.category === 'handicraft').length,
+                            products.filter(p => p.category === 'food').length
+                        ],
+                        backgroundColor: ['#C9A03D', '#2C5E3F', '#146B4D']
+                    }]
+                }
+            });
+        }
+    }
+
+    // ---------- TABS ----------
     document.querySelectorAll(".nav-item").forEach(item => {
         item.addEventListener("click", () => {
             document.querySelectorAll(".nav-item").forEach(nav => nav.classList.remove("active"));
@@ -691,17 +574,25 @@ document.getElementById("saveShopBtn").onclick = async () => {
             const tabId = item.getAttribute("data-tab");
             document.querySelectorAll(".tab-content").forEach(tab => tab.style.display = "none");
             document.getElementById(`${tabId}Tab`).style.display = "block";
-            if(tabId === "shops") renderShopsTable();
-            if(tabId === "products") renderProductsTable();
-            if(tabId === "registrations") renderRegistrations();
-            if(tabId === "analytics") renderGrowthAnalytics();
-            if(tabId === "dashboard") { renderDashboardChart(); updateStats(); }
+            if (tabId === "shops") renderShopsTable();
+            if (tabId === "products") renderProductsTable();
+            if (tabId === "registrations") renderRegistrations();
+            if (tabId === "analytics") renderGrowthAnalytics();
+            if (tabId === "dashboard") { renderDashboardChart(); updateStats(); }
         });
     });
-    // initial load
+
+    // ---------- INITIAL LOAD ----------
     (async () => {
         await loadShops();
-        updateStats(); renderShopsTable(); renderProductsTable(); renderRegistrations(); renderDashboardChart(); renderGrowthAnalytics();
+        await loadProducts();
+        await loadRegistrations();
+        updateStats();
+        renderShopsTable();
+        renderProductsTable();
+        renderRegistrations();
+        renderDashboardChart();
+        renderGrowthAnalytics();
     })();
 </script>
 </body>

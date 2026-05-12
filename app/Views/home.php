@@ -458,8 +458,9 @@
     <div class="container">
         <div class="nav">
             <div class="logo">
-                <img src="<?= base_url('images/DTI-CARP_Logo-removebg-preview.png') ?>" alt="CARP Logo">
                 <img src="<?= base_url('images/DTI-LOGO.png') ?>" alt="DTI Logo">
+                <img src="<?= base_url('images/DTI-CARP_Logo-removebg-preview.png') ?>" alt="CARP Logo">
+                
             </div>
             <div class="nav-links">
                 <a href="<?= base_url('/') ?>">Home</a>

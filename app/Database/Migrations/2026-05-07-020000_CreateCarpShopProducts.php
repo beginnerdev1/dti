@@ -26,16 +26,16 @@ class CreateCarpShopProducts extends Migration
                 'constraint' => 200,
                 'comment'    => 'Product name',
             ],
-            'slug' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 255,
-                'null'       => true,
-                'comment'    => 'URL-friendly product slug',
-            ],
             'description' => [
                 'type' => 'TEXT',
                 'null' => true,
                 'comment' => 'Product description',
+            ],
+            'image' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+                'comment'    => 'Product image path or URL',
             ],
             'price' => [
                 'type'       => 'DECIMAL',
@@ -48,13 +48,6 @@ class CreateCarpShopProducts extends Migration
                 'constraint' => 3,
                 'default'    => 'PHP',
                 'comment'    => 'Currency code',
-            ],
-            'stock' => [
-                'type'       => 'INT',
-                'constraint' => 11,
-                'unsigned'   => true,
-                'default'    => 0,
-                'comment'    => 'Stock quantity',
             ],
             'category' => [
                 'type'       => 'VARCHAR',

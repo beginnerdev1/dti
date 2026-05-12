@@ -4,20 +4,20 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ShopModel extends Model
+class ProductModel extends Model
 {
-    protected $table = 'carp_shops';      // ← updated table name
+    protected $table = 'carp_shop_products';
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useTimestamps = true;
 
     protected $allowedFields = [
+        'carp_shop_id',
         'name',
-        'type',
-        'location',
-        'contact_number',
+        'price',
+        'category',
         'description',
-        'image',            // ← new field for uploaded image path
+        'image',
         'tags',
         'status',
     ];

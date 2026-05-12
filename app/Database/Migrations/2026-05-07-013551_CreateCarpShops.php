@@ -38,9 +38,15 @@ class CreateCarpShops extends Migration
                 'comment'    => 'Phone or mobile number',
             ],
             'description' => [
-                'type' => 'TEXT',
-                'null' => true,
+                'type'    => 'TEXT',
+                'null'    => true,
                 'comment' => 'Shop story, products, mission',
+            ],
+            'image' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 255,
+                'null'       => true,
+                'comment'    => 'Image file path or URL (profile/logo)',
             ],
             'tags' => [
                 'type'       => 'VARCHAR',
@@ -69,7 +75,7 @@ class CreateCarpShops extends Migration
         $this->forge->addKey('status');
         $this->forge->addKey('location');
 
-        $this->forge->createTable('carp_shops', true, ['ENGINE' => 'InnoDB']); // true = IF NOT EXISTS
+        $this->forge->createTable('carp_shops', true, ['ENGINE' => 'InnoDB']);
     }
 
     public function down()

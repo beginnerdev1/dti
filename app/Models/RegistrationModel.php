@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ShopModel extends Model
+class RegistrationModel extends Model
 {
-    protected $table = 'carp_shops';      // ← updated table name
+    protected $table = 'registrations';
     protected $primaryKey = 'id';
     protected $returnType = 'array';
     protected $useTimestamps = true;
@@ -17,7 +17,6 @@ class ShopModel extends Model
         'location',
         'contact_number',
         'description',
-        'image',            // ← new field for uploaded image path
         'tags',
         'status',
     ];
