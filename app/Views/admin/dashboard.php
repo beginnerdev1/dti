@@ -9,11 +9,313 @@
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Admin CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/admin.css') ?>">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         .image-preview { max-width: 60px; max-height: 60px; border-radius: 8px; object-fit: cover; }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F8F7F2;
+            color: #0B3D2E;
+            line-height: 1.5;
+        }
+
+        :root {
+            --green-deep: #06281C;
+            --green-primary: #0B3D2E;
+            --green-soft: #146B4D;
+            --green-light: #EAF4EE;
+            --gold-main: #D4AF37;
+            --gold-dark: #9C7412;
+            --gold-soft: #F8E7A8;
+            --gold-pale: #FFF7D6;
+            --white: #FFFFFF;
+            --cream-bg: #F8F7F2;
+            --neutral-gray: #667085;
+            --admin-bg: #F8F7F2;
+            --card-white: #FFFFFF;
+            --shadow-sm: 0 10px 30px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
+            --shadow-md: 0 25px 45px rgba(0,0,0,0.12);
+            --border-radius-card: 1.6rem;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR - make it flex column */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #06281C 0%, #0B3D2E 100%);
+            color: #e2dccd;
+            flex-shrink: 0;
+            transition: all 0.3s;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-header {
+            padding: 1.8rem 1.5rem;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFF7D6, var(--gold-main));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .sidebar-header p {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 4px;
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.9rem 1.8rem;
+            margin: 4px 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+            color: #ddd2b6;
+        }
+
+        .nav-item i {
+            width: 24px;
+            font-size: 1.2rem;
+        }
+
+        .nav-item.active, .nav-item:hover {
+            background: var(--gold-main);
+            color: var(--green-deep);
+        }
+
+        /* Logout item stays at bottom */
+        .logout-item {
+            margin-top: auto;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid rgba(212,175,55,0.2);
+            padding-top: 1rem;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            flex: 1;
+            padding: 1.8rem 2rem;
+            overflow-x: auto;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-left: 5px solid var(--gold-main);
+            padding-left: 1rem;
+        }
+
+        .admin-badge {
+            background: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-white);
+            border-radius: 1.6rem;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(212,175,55,0.18);
+        }
+
+        .stat-info h4 {
+            font-size: 0.85rem;
+            color: #6C7A68;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--green-primary);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--gold-main);
+        }
+
+        /* Tables & Cards */
+        .admin-card {
+            background: white;
+            border-radius: 1.6rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(212,175,55,0.18);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--green-primary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-dark);
+            color: var(--green-deep);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gold-main);
+            border-radius: 40px;
+            padding: 0.4rem 1rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.9rem 0.5rem;
+            border-bottom: 1px solid rgba(212,175,55,0.2);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--green-deep);
+        }
+
+        .status-badge {
+            background: var(--green-light);
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .action-icons i {
+            margin: 0 6px;
+            cursor: pointer;
+            color: var(--gold-dark);
+            transition: 0.2s;
+        }
+
+        .action-icons i:hover {
+            color: var(--green-deep);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h3 {
+            margin-bottom: 1rem;
+        }
+
+        .modal-content input, .modal-content select, .modal-content textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin: 0.5rem 0 1rem;
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @media (max-width: 780px) {
+            .sidebar { width: 80px; }
+            .sidebar-header h2, .sidebar-header p, .nav-item span { display: none; }
+            .nav-item { justify-content: center; padding: 0.9rem; }
+            .main-content { padding: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -28,8 +330,8 @@
             <div class="nav-item active" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i><span> Dashboard</span></div>
             <div class="nav-item" data-tab="shops"><i class="fas fa-store"></i><span> Manage Shops</span></div>
             <div class="nav-item" data-tab="products"><i class="fas fa-boxes"></i><span> Products</span></div>
-            <div class="nav-item" data-tab="registrations"><i class="fas fa-user-plus"></i><span> Registrations</span></div>
-            <div class="nav-item" data-tab="analytics"><i class="fas fa-chart-line"></i><span> Analytics</span></div>
+            <!-- Logout item at bottom -->
+            <div class="nav-item logout-item" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span> Logout</span></div>
         </div>
     </div>
 
@@ -85,18 +387,6 @@
             </div>
         </div>
 
-        <!-- Registrations Tab -->
-        <div id="registrationsTab" class="tab-content" style="display: none;">
-            <div class="admin-card"><h3><i class="fas fa-user-check"></i> Pending & Approved Registrations</h3>
-                <table><thead><tr><th>Applicant / Coop</th><th>Type</th><th>Location</th><th>Status</th><th>Actions</th></tr></thead><tbody id="registrationsTableBody"></tbody></table>
-            </div>
-        </div>
-
-        <!-- Analytics Tab -->
-        <div id="analyticsTab" class="tab-content" style="display: none;">
-            <div class="admin-card"><h3><i class="fas fa-chart-simple"></i> Platform Insights</h3><canvas id="growthChart" width="400" height="200" style="max-height: 250px;"></canvas></div>
-            <div class="admin-card"><h3>Top Product Categories</h3><canvas id="categoryChart" width="400" height="200" style="max-height: 250px;"></canvas></div>
-        </div>
     </div>
 </div>
 
@@ -127,7 +417,7 @@
     </div>
 </div>
 
-<!-- ========== PRODUCT MODAL (no slug/stock; brochure fields) ========== -->
+<!-- ========== PRODUCT MODAL ========== -->
 <div id="productModal" class="modal">
     <div class="modal-content" style="max-width:600px;">
         <h3 id="productModalTitle">Add Product</h3>
@@ -156,6 +446,13 @@
     window.dashChart = null;
     window.growthChart = null;
 
+    // ---------- LOGOUT FUNCTION ----------
+    document.getElementById("logoutBtn").addEventListener("click", function() {
+        if (confirm("Are you sure you want to logout?")) {
+            window.location.href = BASE_URL + "/admin/logout";
+        }
+    });
+
     // ---------- DATA ----------
     let shops = [];
     let products = [];
@@ -166,7 +463,6 @@
         try {
             const res = await fetch(`${BASE_URL}admin/get-shops`);
             const data = await res.json();
-            // data is an array (empty on error)
             shops = (Array.isArray(data) ? data : []).map(shop => ({
                 id: shop.id,
                 name: shop.name,
@@ -189,7 +485,6 @@
         try {
             const res = await fetch(`${BASE_URL}admin/get-products`);
             const data = await res.json();
-            // data is an array (empty on error)
             products = (Array.isArray(data) ? data : []).map(p => ({
                 id: p.id,
                 name: p.name,
@@ -209,18 +504,10 @@
     }
 
     async function loadRegistrations() {
-        try {
-            const res = await fetch(`${BASE_URL}admin/get-registrations`);
-            const data = await res.json();
-            // data is an array (empty on error)
-            registrations = Array.isArray(data) ? data : [];
-        } catch (e) {
-            console.error('Load registrations failed', e);
-            registrations = [];
-        }
+        registrations = []; // placeholder, keep empty for now
     }
 
-    // ---------- STATS (safe against non‑arrays) ----------
+    // ---------- STATS ----------
     function updateStats() {
         const s = Array.isArray(shops) ? shops : [];
         const p = Array.isArray(products) ? products : [];
@@ -278,26 +565,7 @@
         }).join("");
     }
 
-    function renderRegistrations() {
-        const tbody = document.getElementById("registrationsTableBody");
-        const r = Array.isArray(registrations) ? registrations : [];
-        tbody.innerHTML = r.map(reg => `
-            <tr>
-                <td>${reg.name}</td>
-                <td>${reg.type}</td>
-                <td>${reg.location}</td>
-                <td><span class="status-badge">${reg.status}</span></td>
-                <td class="action-icons">
-                    ${reg.status === "pending" ? `
-                        <i class="fas fa-check-circle" onclick="approveReg(${reg.id})" style="color:green;"></i>
-                        <i class="fas fa-times-circle" onclick="rejectReg(${reg.id})" style="color:red;"></i>
-                    ` : '-'}
-                </td>
-            </tr>
-        `).join("");
-    }
-
-    // ---------- SHOP CRUD (with file upload) ----------
+    // ---------- SHOP CRUD ----------
     window.editShop = (id) => {
         const shop = shops.find(s => s.id == id);
         if (!shop) return alert("Shop not found.");
@@ -307,7 +575,7 @@
         document.getElementById("shopLocation").value = shop.location || "";
         document.getElementById("shopContact").value = shop.contact_number || "";
         document.getElementById("shopDescription").value = shop.description || "";
-        document.getElementById("shopImage").value = ''; // reset file input
+        document.getElementById("shopImage").value = '';
         document.getElementById("shopTags").value = shop.tags || "";
         window.currentEditShopId = id;
         document.getElementById("shopModal").style.display = "flex";
@@ -362,32 +630,30 @@
             });
             const result = await res.json();
             if (result.success) {
-                await loadShops(); // refresh shops with new image path
+                await loadShops();
                 updateStats(); renderShopsTable(); renderDashboardChart();
                 closeModals();
                 document.getElementById("shopName").value = '';
-                document.getElementById("shopImage").value = ''; // clear file input
+                document.getElementById("shopImage").value = '';
             } else alert("Failed: " + (result.message || ''));
         } catch (e) { console.error(e); alert("Error saving shop."); }
     };
 
-    // ---------- PRODUCT CRUD (with file upload) ----------
+    // ---------- PRODUCT CRUD ----------
     window.editProduct = (id) => {
         const prod = products.find(p => p.id == id);
         if (!prod) return alert("Product not found.");
 
-        // 1. Populate the shop dropdown with all shops
         const shopSelect = document.getElementById("productShopSelect");
         shopSelect.innerHTML = shops.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
 
-        // 2. Set form fields (no slug/stock)
         document.getElementById("productModalTitle").innerText = "Edit Product";
         document.getElementById("productName").value = prod.name;
         document.getElementById("productPrice").value = prod.price;
         document.getElementById("productCategory").value = prod.category;
         shopSelect.value = prod.shopId;
         document.getElementById("productDescription").value = prod.description || '';
-        document.getElementById("productImage").value = '';   // reset file input
+        document.getElementById("productImage").value = '';
         document.getElementById("productTags").value = prod.tags || '';
         window.currentEditProductId = id;
         document.getElementById("productModal").style.display = "flex";
@@ -444,38 +710,9 @@
                 await loadProducts();
                 updateStats(); renderProductsTable(); renderDashboardChart();
                 document.getElementById("productModal").style.display = "none";
-                document.getElementById("productImage").value = ''; // clear file
+                document.getElementById("productImage").value = '';
             } else alert("Failed: " + (result.message || ''));
         } catch (e) { console.error(e); alert("Error saving product."); }
-    };
-
-    // ---------- REGISTRATIONS ----------
-    window.approveReg = async (id) => {
-        const res = await fetch(`${BASE_URL}admin/approve-registration`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
-            body: new URLSearchParams({ id, csrf_token: document.getElementById("csrfToken").value })
-        });
-        const result = await res.json();
-        if (result.success) {
-            alert("Registration approved! Shop created.");
-            await loadShops();
-            await loadRegistrations();
-            updateStats(); renderShopsTable(); renderRegistrations(); renderDashboardChart();
-        } else alert("Failed.");
-    };
-
-    window.rejectReg = async (id) => {
-        const res = await fetch(`${BASE_URL}admin/reject-registration`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-Requested-With': 'XMLHttpRequest' },
-            body: new URLSearchParams({ id, csrf_token: document.getElementById("csrfToken").value })
-        });
-        const result = await res.json();
-        if (result.success) {
-            registrations = registrations.filter(r => r.id != id);
-            renderRegistrations(); updateStats();
-        } else alert("Failed.");
     };
 
     // ---------- MODALS ----------
@@ -490,7 +727,7 @@
         window.currentEditShopId = null;
         document.getElementById("modalTitle").innerText = "Add New Shop";
         document.getElementById("shopName").value = '';
-        document.getElementById("shopImage").value = ''; // clear file
+        document.getElementById("shopImage").value = '';
         document.getElementById("shopModal").style.display = "flex";
     };
 
@@ -500,7 +737,7 @@
         document.getElementById("productName").value = '';
         document.getElementById("productPrice").value = '';
         document.getElementById("productDescription").value = '';
-        document.getElementById("productImage").value = ''; // clear file
+        document.getElementById("productImage").value = '';
         document.getElementById("productTags").value = '';
         const shopSelect = document.getElementById("productShopSelect");
         shopSelect.innerHTML = shops.map(s => `<option value="${s.id}">${s.name}</option>`).join("");
@@ -530,44 +767,10 @@
         }
     }
 
-    function renderGrowthAnalytics() {
-        const ctx = document.getElementById("growthChart")?.getContext("2d");
-        if (ctx && window.growthChart) window.growthChart.destroy();
-        if (ctx) {
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-                    datasets: [{
-                        label: 'Shops Growth',
-                        data: [4, 7, 9, 12, shops.length],
-                        borderColor: '#2C5E3F',
-                        tension: 0.3
-                    }]
-                }
-            });
-        }
-        const catCtx = document.getElementById("categoryChart")?.getContext("2d");
-        if (catCtx) {
-            new Chart(catCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Agri', 'Handicraft', 'Food'],
-                    datasets: [{
-                        data: [
-                            products.filter(p => p.category === 'agri').length,
-                            products.filter(p => p.category === 'handicraft').length,
-                            products.filter(p => p.category === 'food').length
-                        ],
-                        backgroundColor: ['#C9A03D', '#2C5E3F', '#146B4D']
-                    }]
-                }
-            });
-        }
-    }
+    function renderGrowthAnalytics() { /* placeholder */ }
 
     // ---------- TABS ----------
-    document.querySelectorAll(".nav-item").forEach(item => {
+    document.querySelectorAll(".nav-item:not(#logoutBtn)").forEach(item => {
         item.addEventListener("click", () => {
             document.querySelectorAll(".nav-item").forEach(nav => nav.classList.remove("active"));
             item.classList.add("active");
@@ -590,7 +793,6 @@
         updateStats();
         renderShopsTable();
         renderProductsTable();
-        renderRegistrations();
         renderDashboardChart();
         renderGrowthAnalytics();
     })();

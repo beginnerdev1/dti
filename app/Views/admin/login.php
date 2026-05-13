@@ -42,7 +42,6 @@
             position: relative;
         }
 
-        /* Subtle golden glow */
         body::before {
             content: "";
             position: absolute;
@@ -109,6 +108,11 @@
             display: block;
         }
 
+        .input-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
         .form-input {
             width: 100%;
             padding: 0.9rem 1.2rem;
@@ -121,10 +125,29 @@
             background: var(--cream-bg);
         }
 
+        .password-input {
+            padding-right: 3rem;
+        }
+
         .form-input:focus {
             border-color: var(--gold-main);
             background: #fff;
             box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--neutral-gray);
+            transition: color 0.2s;
+            font-size: 1.1rem;
+        }
+
+        .toggle-password:hover {
+            color: var(--gold-dark);
         }
 
         .btn-login {
@@ -152,14 +175,22 @@
             box-shadow: 0 20px 35px rgba(212,175,55,0.35);
         }
 
-        .error-message {
-            background: #FFE8E6;
-            color: #D93025;
+        .message {
             padding: 0.7rem 1rem;
             border-radius: 20px;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
             text-align: left;
+        }
+
+        .error-message {
+            background: #FFE8E6;
+            color: #D93025;
+        }
+
+        .success-message {
+            background: #E0F2E9;
+            color: #0B3D2E;
         }
 
         .back-link {
@@ -186,7 +217,6 @@
 <body>
     <div class="login-wrapper">
         <div class="login-card">
-            <!-- Logos -->
             <div class="logo">
                 <img src="<?= base_url('images/DTI-LOGO.png') ?>" alt="DTI Logo">
                 <img src="<?= base_url('images/DTI-CARP_Logo-removebg-preview.png') ?>" alt="CARP Logo">
@@ -195,28 +225,37 @@
             <h2>Admin Login</h2>
             <p>DTI–CARP Connect Aurora Dashboard</p>
 
-            <!-- Error message (if any) -->
+            <!-- Display flash messages -->
             <?php if (session()->getFlashdata('error')): ?>
-                <div class="error-message">
+                <div class="message error-message">
                     <i class="fas fa-exclamation-circle"></i> <?= session()->getFlashdata('error') ?>
                 </div>
             <?php endif; ?>
 
-            <!-- Login form -->
-            <form action="<?= base_url('admin/login') ?>" method="post">
+            <?php if (session()->getFlashdata('success')): ?>
+                <div class="message success-message">
+                    <i class="fas fa-check-circle"></i> <?= session()->getFlashdata('success') ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Login form: now points to Auth controller -->
+            <form action="<?= base_url('/admin/login') ?>" method="POST">
                 <?= csrf_field() ?>
 
                 <div class="form-group">
-                    <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
-                    <input type="email" name="email" id="email" class="form-input"
-                           placeholder="admin@aurora.dti.gov.ph" required
-                           value="<?= old('email') ?>">
+                    <label for="username"><i class="fas fa-user"></i> Username or Email</label>
+                    <input type="text" name="username" id="username" class="form-input"
+                           placeholder="Enter your username or email" required
+                           value="<?= old('username') ?>">
                 </div>
 
                 <div class="form-group">
                     <label for="password"><i class="fas fa-lock"></i> Password</label>
-                    <input type="password" name="password" id="password" class="form-input"
-                           placeholder="••••••••" required>
+                    <div class="input-wrapper">
+                        <input type="password" name="password" id="password" class="form-input password-input"
+                               placeholder="••••••••" required>
+                        <i class="far fa-eye toggle-password" id="togglePasswordIcon"></i>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn-login">
@@ -229,5 +268,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const togglePassword = document.getElementById('togglePasswordIcon');
+        const passwordField = document.getElementById('password');
+
+        if (togglePassword && passwordField) {
+            togglePassword.addEventListener('click', function () {
+                const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordField.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+        }
+    </script>
 </body>
 </html>
