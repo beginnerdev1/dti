@@ -418,14 +418,17 @@ async function loadProducts() {
 async function loadShops() {
     const grid = document.getElementById('shopsGrid');
     try {
-        const res  = await fetch(`${BASE_URL}?json=shops`);
+        // ✅ Use the correct endpoint that exists in your backend
+        const res = await fetch(`${BASE_URL}?json=all_shops`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = await res.json();
         if (json.status !== 200 || !json.shops.length) {
             grid.innerHTML = errorHTML('No shops available yet.');
             return;
         }
-        grid.innerHTML = json.shops.map(s => `
+        // Show only the first 4 shops (matching the featured products layout)
+        const shopsToShow = json.shops.slice(0, 4);
+        grid.innerHTML = shopsToShow.map(s => `
             <div class="shop-card"
                  onclick="location.href='${BASE_URL}brochure?id=${s.id}'">
                 <div class="card-img">
@@ -435,21 +438,12 @@ async function loadShops() {
                     <div class="shop-type">${badgeLabel(s.type)}</div>
                     <div class="product-title">${escapeHtml(s.name)}</div>
                     <div class="location"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(s.location)}</div>
-                    ${s.contact_number
-                        ? `<div class="vendor"><i class="fas fa-phone"></i> ${escapeHtml(s.contact_number)}</div>`
-                        : ''}
-                    ${s.description
-                        ? `<div class="shop-desc">
-                               ${escapeHtml(s.description.length > 70 ? s.description.substring(0, 70) + '…' : s.description)}
-                           </div>`
-                        : ''}
-                    ${s.tags && s.tags.length
-                        ? `<div class="product-tags">
-                               ${s.tags.slice(0, 3).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}
-                           </div>`
-                        : ''}
+                    ${s.contact_number ? `<div class="vendor"><i class="fas fa-phone"></i> ${escapeHtml(s.contact_number)}</div>` : ''}
+                    ${s.description ? `<div class="shop-desc">${escapeHtml(s.description.length > 70 ? s.description.substring(0, 70) + '…' : s.description)}</div>` : ''}
+                    ${s.tags && s.tags.length ? `<div class="product-tags">${s.tags.slice(0, 3).map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
                 </div>
-            </div>`).join('');
+            </div>
+        `).join('');
     } catch (err) {
         console.error('loadShops error:', err);
         grid.innerHTML = errorHTML('Could not load shops. Please try again.');
