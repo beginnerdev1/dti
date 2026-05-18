@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>DTI–CARP Connect | Aurora CARPreneurs Hub</title>
-    <!-- Google Fonts: Poppins (same as main design) -->
+    <title>DTI-CARP Connect | About Us - Aurora CARPreneurs Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -17,25 +15,26 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: #f7faf4; /* lighter soft off-white for clarity */
-            color: #1d4f33; /* deep green for text */
+            background: #FAF9F6;
+            color: #0B3D2E;
             line-height: 1.4;
         }
 
-        /* color palette aligned with home.php branding */
         :root {
-            --green-deep: #1d4f33;
-            --green-primary: #4ea178;
-            --green-soft: #96d0b5;
-            --green-light: #e7f6ef;
-            --gold-dark: #9f7a26;
-            --gold-main: #d4b13b;
-            --gold-light: #f3e3a8;
-            --gold-pale: #fbf5d7;
-            --cream-bg: #f7faf4;
-            --shadow-sm: 0 12px 28px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0,0,0,0.02);
-            --shadow-md: 0 20px 30px -12px rgba(0, 0, 0, 0.08);
-            --border-radius-card: 1.5rem;
+            --green-deep: #06281C;
+            --green-primary: #0B3D2E;
+            --green-soft: #146B4D;
+            --green-light: #EAF4EE;
+            --gold-main: #D4AF37;
+            --gold-dark: #9C7412;
+            --gold-soft: #F8E7A8;
+            --gold-pale: #FFF7D6;
+            --white: #FFFFFF;
+            --cream-bg: #F8F7F2;
+            --neutral-gray: #667085;
+            --shadow-sm: 0 10px 30px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
+            --shadow-md: 0 25px 45px rgba(0,0,0,0.12);
+            --border-radius-card: 1.6rem;
         }
 
         a {
@@ -49,23 +48,24 @@
             padding: 0 24px;
         }
 
-        /* HERO SECTION (same as main, different headline) */
+        /* HERO SECTION - Matching main design */
         .hero {
-            background: linear-gradient(135deg, var(--green-light) 0%, var(--green-primary) 100%);
+            background: linear-gradient(135deg, #06281C 0%, #0B3D2E 45%, #146B4D 100%);
+            border-bottom: 4px solid var(--gold-main);
             border-radius: 0 0 2.5rem 2.5rem;
-            padding: 2rem 0 3rem 0;
+            padding: 2rem 0 4rem 0;
             margin-bottom: 2rem;
-            color: var(--green-deep);
+            color: white;
             position: relative;
             overflow: hidden;
         }
         .hero::after {
             content: "🌾";
-            font-size: 200px;
-            opacity: 0.06;
+            font-size: 220px;
+            opacity: 0.05;
             position: absolute;
-            bottom: -30px;
-            right: -10px;
+            bottom: -40px;
+            right: -20px;
             pointer-events: none;
         }
         .nav {
@@ -74,26 +74,22 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
         .logo {
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            line-height: 1;
+            background: rgba(255,255,255,0.95);
+            padding: 0.8rem 1.2rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
         .logo img {
             width: auto;
             max-height: 110px;
             object-fit: contain;
             display: block;
-            max-width: 100%;
-        }
-        .logo span {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #FEF1CF;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
         }
         .nav-links {
             display: flex;
@@ -101,13 +97,28 @@
             font-weight: 500;
         }
         .nav-links a {
-            color: var(--green-deep);
-            transition: 0.2s;
+            color: white;
+            font-weight: 600;
+            position: relative;
+            transition: 0.3s;
         }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--gold-dark);
-            border-bottom: 2px solid var(--gold-main);
-            padding-bottom: 4px;
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--gold-main);
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 0%;
+            height: 2px;
+            background: var(--gold-main);
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
         }
         .hero-content {
             text-align: center;
@@ -115,126 +126,255 @@
             margin: 0 auto;
         }
         .hero-content h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: white;
+            letter-spacing: -1px;
             margin-bottom: 1rem;
-            color: var(--green-deep);
         }
         .hero-content h1 span {
-            color: var(--gold-dark);
-            border-bottom: 2px dashed var(--gold-main);
+            color: var(--gold-main);
+            border-bottom: 3px solid var(--gold-main);
         }
         .hero-content p {
             font-size: 1.2rem;
-            opacity: 0.95;
-            color: #315b45;
+            color: #E5E7EB;
+            margin-bottom: 2rem;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #D4AF37, #B68A16);
+            color: #06281C;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(212,175,55,0.25);
+            transition: all 0.25s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            background: linear-gradient(135deg, #E6C252, #C99A1C);
+            box-shadow: 0 20px 35px rgba(212,175,55,0.35);
         }
 
-        /* about specific sections */
-        .about-section {
-            background: white;
-            border-radius: 2rem;
-            padding: 2.5rem;
+        /* Section Headers */
+        .section-header {
+            border-left: 6px solid var(--gold-main);
+            padding-left: 1.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--green-primary);
+        }
+        .section-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--green-primary);
+        }
+
+        /* About Cards */
+        .about-card {
+            background: var(--white);
+            border-radius: var(--border-radius-card);
+            padding: 2rem;
             margin: 2rem 0;
             box-shadow: var(--shadow-sm);
-            border: 1px solid #F2E7CE;
+            border: 1px solid rgba(212,175,55,0.18);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .about-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold-main);
         }
 
-        .mission-vision {
-            display: flex;
+        /* Mission Vision Grid */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            flex-wrap: wrap;
             margin: 2rem 0;
         }
-        .card-mv {
-            flex: 1;
-            background: var(--green-light);
-            border-radius: 1.8rem;
+        .mv-card {
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--white) 100%);
+            border-radius: var(--border-radius-card);
             padding: 2rem;
-            transition: all 0.2s;
             border-left: 6px solid var(--gold-main);
+            transition: all 0.25s ease;
         }
-        .card-mv h3 {
+        .mv-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+        }
+        .mv-card h3 {
             font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--green-primary);
             margin-bottom: 1rem;
-            color: var(--green-deep);
         }
+        .mv-card h3 i {
+            color: var(--gold-main);
+            margin-right: 0.75rem;
+        }
+        .mv-card p {
+            color: var(--neutral-gray);
+            line-height: 1.6;
+        }
+
+        /* Purpose Grid */
         .purpose-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
             margin: 2rem 0;
         }
         .purpose-item {
-            background: #FEFAF0;
+            background: var(--white);
+            border-radius: var(--border-radius-card);
             padding: 1.8rem;
-            border-radius: 1.5rem;
             text-align: center;
-            transition: 0.2s;
-            border: 1px solid #EDE3CE;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(212,175,55,0.18);
+            cursor: pointer;
+        }
+        .purpose-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold-main);
         }
         .purpose-item i {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--gold-main);
             margin-bottom: 1rem;
         }
         .purpose-item h4 {
             font-size: 1.3rem;
+            font-weight: 700;
             margin-bottom: 0.8rem;
             color: var(--green-primary);
         }
-        .story-quote {
-            background: linear-gradient(120deg, #F9EFCF 0%, #FFF6E5 100%);
-            padding: 2rem;
-            border-radius: 2rem;
+        .purpose-item p {
+            color: var(--neutral-gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Quote Block */
+        .quote-block {
+            background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold-soft) 100%);
+            padding: 2.5rem;
+            border-radius: var(--border-radius-card);
             margin: 2rem 0;
             text-align: center;
-            font-style: italic;
+            border: 1px solid var(--gold-main);
+            position: relative;
+        }
+        .quote-block i.fa-quote-left {
+            font-size: 2rem;
+            color: var(--gold-main);
+            opacity: 0.5;
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+        }
+        .quote-block i.fa-quote-right {
+            font-size: 2rem;
+            color: var(--gold-main);
+            opacity: 0.5;
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
+        }
+        .quote-text {
             font-size: 1.2rem;
-            border: 1px solid var(--gold-light);
+            font-style: italic;
+            color: var(--green-primary);
+            font-weight: 500;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
-        .impact-stats {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 1.5rem;
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
             margin: 2rem 0;
         }
-        .stat {
-            flex: 1;
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--border-radius-card);
+            padding: 2rem;
             text-align: center;
-            background: white;
-            border-radius: 2rem;
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+            border: 1px solid rgba(212,175,55,0.18);
+        }
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--gold-main);
         }
         .stat-number {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             color: var(--gold-dark);
+            line-height: 1;
         }
-        .btn-connect {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: var(--gold-main);
-            color: var(--green-deep);
-            font-weight: 700;
-            padding: 0.9rem 2rem;
-            border-radius: 60px;
-            transition: 0.2s;
-            margin-top: 1rem;
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--green-primary);
+            margin: 0.5rem 0;
         }
-        .btn-connect:hover {
-            background: #D9B650;
-            transform: translateY(-3px);
+        .stat-sub {
+            font-size: 0.8rem;
+            color: var(--neutral-gray);
         }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--green-light) 0%, var(--cream-bg) 100%);
+            border-radius: var(--border-radius-card);
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem 0;
+            border: 2px solid var(--gold-soft);
+        }
+        .cta-section i {
+            font-size: 3rem;
+            color: var(--gold-main);
+            margin-bottom: 1rem;
+        }
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--green-primary);
+            margin: 0.5rem 0;
+        }
+        .cta-section p {
+            max-width: 600px;
+            margin: 1rem auto;
+            color: var(--neutral-gray);
+        }
+
+        /* Footer */
         .footer {
-            background: var(--green-deep);
-            color: #DFD9C4;
-            border-radius: 2rem 2rem 0 0;
-            padding: 3rem 0 2rem;
-            margin-top: 4rem;
+            background: linear-gradient(135deg, #041B13, #0B3D2E);
+            border-top: 3px solid var(--gold-main);
+            color: white;
+            margin-top: 5rem;
+            padding: 4rem 0 2rem;
         }
         .footer-inner {
             display: flex;
@@ -242,152 +382,192 @@
             justify-content: space-between;
             gap: 2rem;
         }
+        .footer-col {
+            min-width: 140px;
+        }
         .footer-col h4 {
-            color: var(--gold-light);
+            color: var(--gold-main);
             margin-bottom: 1rem;
         }
         .footer-col a {
             display: block;
             margin: 0.6rem 0;
             opacity: 0.85;
+            color: white;
+            transition: 0.2s;
         }
         .footer-col a:hover {
-            opacity: 1;
             color: var(--gold-main);
+            opacity: 1;
+            transform: translateX(4px);
         }
         .copyright {
             text-align: center;
             margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
             padding-top: 1.5rem;
-            border-top: 1px solid rgba(201,160,61,0.3);
-            font-size: 0.8rem;
+            color: #D1D5DB;
+            font-size: 0.9rem;
         }
+
         @media (max-width: 780px) {
-            .hero-content h1 { font-size: 2rem; }
-            .mission-vision { flex-direction: column; }
-            .logo img { max-height: 80px; }
+            .hero-content h1 {
+                font-size: 2.4rem;
+            }
+            .nav {
+                flex-direction: column;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .logo img {
+                max-height: 70px;
+            }
+            .mv-grid {
+                grid-template-columns: 1fr;
+            }
+            .purpose-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
+
 <div class="hero">
     <div class="container">
         <div class="nav">
             <div class="logo">
                 <img src="<?= base_url('images/DTI-LOGO.png') ?>" alt="DTI Logo">
                 <img src="<?= base_url('images/DTI-CARP_Logo-removebg-preview.png') ?>" alt="CARP Logo">
-                
             </div>
             <div class="nav-links">
                 <a href="<?= base_url('/') ?>">Home</a>
                 <a href="<?= base_url('shops') ?>">ARBO</a>
-                <a href="<?= base_url('aboutus') ?>">About Us</a>
+                <a href="<?= base_url('aboutus') ?>" class="active">About Us</a>
             </div>
         </div>
         <div class="hero-content">
-            <h1>DTI-CARP Connect : Aurora CARPreneurs E-Brochure Hub</h1>
-            <p>Connecting local farmers, ARBs, and cooperatives to wider markets — proudly Aurora.</p>
+            <h1>About <span>Aurora CARPreneurs</span></h1>
+            <p>Discover the heart behind DTI-CARP Connect — empowering local farmers, ARBs, and cooperatives across Aurora province.</p>
+            <a href="<?= base_url('shops') ?>" class="btn-primary">
+                <i class="fas fa-store"></i> Explore Our Shops
+            </a>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <!-- welcome & intro from brief -->
-    <div class="about-section">
-        <h2 style="font-size: 2rem; color: var(--green-deep); border-left: 6px solid var(--gold-main); padding-left: 1rem; margin-bottom: 1.5rem;">Welcome to DTI–CARP Connect</h2>
-        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Your gateway to discovering the vibrant products and inspiring stories of Aurora’s CARPreneurs — our local Agrarian Reform Beneficiaries (ARBs), cooperatives, and farmer organizations. This digital hub is designed to bridge farmers to markets, giving our local producers a stronger voice and wider reach.</p>
-        <p>From handcrafted goods to proudly grown agricultural products, each feature represents the hard work, resilience, and innovation of Aurora’s farming communities.</p>
+    <!-- Welcome Section -->
+    <div class="about-card">
+        <div class="section-header">
+            <h2><i class="fas fa-heart" style="color: var(--gold-main);"></i> Welcome to DTI–CARP Connect</h2>
+        </div>
+        <p style="font-size: 1.1rem; line-height: 1.6; color: var(--neutral-gray); margin-bottom: 1rem;">
+            Your gateway to discovering the vibrant products and inspiring stories of Aurora's CARPreneurs — our local Agrarian Reform Beneficiaries (ARBs), cooperatives, and farmer organizations.
+        </p>
+        <p style="font-size: 1rem; line-height: 1.6; color: var(--neutral-gray);">
+            This digital hub is designed to bridge farmers to markets, giving our local producers a stronger voice and wider reach. 
+            From handcrafted goods to proudly grown agricultural products, each feature represents the hard work, resilience, and innovation of Aurora's farming communities.
+        </p>
     </div>
 
-    <!-- Our Purpose Section with 4 pillars (from brief) -->
-    <div class="about-section">
-        <h2 style="font-size: 1.9rem; color: var(--green-primary); margin-bottom: 0.5rem;"><i class="fas fa-bullseye" style="color: var(--gold-main);"></i> Our Purpose</h2>
-        <p style="margin-bottom: 1rem;">DTI–CARP Connect exists to:</p>
+
+    <!-- Our Purpose Section -->
+    <div class="about-card">
+        <div class="section-header">
+            <h2><i class="fas fa-bullseye" style="color: var(--gold-main);"></i> Our Purpose</h2>
+        </div>
         <div class="purpose-grid">
             <div class="purpose-item">
                 <i class="fas fa-hand-holding-heart"></i>
-                <h4>Empower local farmers & ARBs</h4>
+                <h4>Empower Local Farmers & ARBs</h4>
                 <p>Showcasing products from Agrarian Reform Beneficiaries, elevating their visibility and economic dignity.</p>
             </div>
             <div class="purpose-item">
                 <i class="fas fa-chart-line"></i>
-                <h4>Strengthen digital promotion</h4>
+                <h4>Strengthen Digital Promotion</h4>
                 <p>Leveraging e-brochure tools and online presence for rural enterprises in Aurora province.</p>
             </div>
             <div class="purpose-item">
                 <i class="fas fa-handshake"></i>
-                <h4>Connect buyers, partners & advocates</h4>
+                <h4>Connect Buyers & Partners</h4>
                 <p>Building direct links between community enterprises and conscious consumers.</p>
             </div>
             <div class="purpose-item">
                 <i class="fas fa-seedling"></i>
-                <h4>Promote inclusive growth</h4>
-                <p>Sustainable livelihood and equitable opportunities across Aurora’s farming communities.</p>
+                <h4>Promote Inclusive Growth</h4>
+                <p>Sustainable livelihood and equitable opportunities across Aurora's farming communities.</p>
             </div>
         </div>
     </div>
 
-    <!-- Mission & Vision aligned to CARP spirit -->
-    <div class="mission-vision">
-        <div class="card-mv">
-            <h3><i class="fas fa-flag-checkered" style="color: var(--gold-main);"></i> Our Mission</h3>
-            <p>To accelerate rural development by digitally empowering Aurora’s agrarian reform beneficiaries and small farmers — providing them with market access, product visibility, and a thriving e-commerce ecosystem rooted in fairness and sustainability.</p>
+    <!-- Inspirational Quote -->
+    <div class="quote-block">
+        <i class="fas fa-quote-left"></i>
+        <div class="quote-text">
+            Behind every product is a story — of dedication, community, and hope. By supporting Aurora CARPreneurs, you are not just buying a product — you are uplifting lives, strengthening rural enterprises, and contributing to a more inclusive economy.
         </div>
-        <div class="card-mv">
-            <h3><i class="fas fa-eye"></i> Our Vision</h3>
-            <p>A progressive Aurora where every CARPreneur, cooperative, and farming family is recognized as a vital pillar of local economy — with their stories and products celebrated across the Philippines and beyond.</p>
+        <i class="fas fa-quote-right"></i>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="cta-section">
+        <i class="fas fa-store"></i>
+        <h2>✨ Discover. Connect. Support Local.</h2>
+        <p>Together, let's grow Aurora — one product, one farmer, one community at a time.</p>
+        <a href="<?= base_url('shops') ?>" class="btn-primary" style="margin-top: 1rem; display: inline-flex;">
+            <i class="fas fa-leaf"></i> Explore CARPreneur Products
+        </a>
+        <div style="margin-top: 1.5rem;">
+            <a href="#" style="color: var(--gold-dark); font-weight: 600;">
+                <i class="fas fa-hand-sparkles"></i> Partner with us →
+            </a>
         </div>
     </div>
 
-    <!-- Why it matters? deep storytelling -->
-    <div class="about-section">
-        <h2 style="font-size: 1.9rem;"><i class="fas fa-heart" style="color: var(--gold-main);"></i> Why It Matters?</h2>
-        <div class="story-quote">
-            <i class="fas fa-quote-left" style="color: var(--gold-dark); margin-right: 8px;"></i> Behind every product is a story — of dedication, community, and hope. By supporting Aurora CARPreneurs, you are not just buying a product — you are uplifting lives, strengthening rural enterprises, and contributing to a more inclusive economy.
-        </div>
-        <div class="impact-stats">
-            <div class="stat"><div class="stat-number">150+</div><div>ARB Households</div><small>empowered across Aurora</small></div>
-            <div class="stat"><div class="stat-number">28</div><div>Coops & Farmers' Orgs</div><small>actively listed</small></div>
-            <div class="stat"><div class="stat-number">12</div><div>Municipalities</div><small>reaching from Baler to Dingalan</small></div>
-            <div class="stat"><div class="stat-number">100%</div><div>Locally Grown & Crafted</div><small>pride of Aurora</small></div>
-        </div>
-    </div>
-
-    <!-- CTA to Discover + Connect (support local mantra) -->
-    <div style="background: linear-gradient(120deg, #E6F0EA 0%, #FEF5E3 100%); border-radius: 2rem; padding: 2.5rem; text-align: center; margin: 2rem 0;">
-        <i class="fas fa-store" style="font-size: 3rem; color: var(--gold-main);"></i>
-        <h2 style="margin: 0.5rem 0; font-size: 2rem;">✨ Discover. Connect. Support Local.</h2>
-        <p style="max-width: 600px; margin: 1rem auto;">Together, let’s grow Aurora — one product, one farmer, one community at a time.</p>
-        <a href="#" class="btn-connect"><i class="fas fa-leaf"></i> Explore CARPreneur Products</a>
-        <div style="margin-top: 1.5rem;"><a href="#" style="color: var(--green-primary); font-weight: 500;"><i class="fas fa-hand-sparkles"></i> Partner with us →</a></div>
-    </div>
-
-    <!-- Additional quote / DTI-CARP endorsement -->
-    <div class="about-section" style="background: white; text-align: left;">
-        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-            <div><i class="fas fa-landmark" style="font-size: 2.5rem; color: var(--gold-main);"></i></div>
-            <div><strong style="font-size: 1.2rem;">DTI–CARP Convergence Program</strong><br>An initiative that bridges the Department of Trade and Industry and the Comprehensive Agrarian Reform Program, focusing on enterprise development for ARB organizations. Aurora stands as a model of cooperative-driven growth.</div>
-        </div>
-        <hr style="margin: 1.5rem 0; border-color: #F2E2CA;">
-        <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; align-items: center;">
-            <div><i class="fas fa-tractor"></i> Farmer-first approach</div>
-            <div><i class="fas fa-chalkboard-user"></i> Technical & digital literacy</div>
-            <div><i class="fas fa-hand-holding-usd"></i> Fair trade & ethical sourcing</div>
+    <!-- DTI-CARP Program Info -->
+    <div class="about-card">
+        <div style="display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;">
+            <div>
+                <i class="fas fa-landmark" style="font-size: 3rem; color: var(--gold-main);"></i>
+            </div>
+            <div style="flex: 1;">
+                <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--green-primary); margin-bottom: 0.5rem;">
+                    DTI–CARP Convergence Program
+                </h3>
+                <p style="color: var(--neutral-gray); line-height: 1.5;">
+                    An initiative that bridges the Department of Trade and Industry and the Comprehensive Agrarian Reform Program, 
+                    focusing on enterprise development for ARB organizations. Aurora stands as a model of cooperative-driven growth.
+                </p>
+                <hr style="margin: 1.5rem 0; border-color: rgba(212,175,55,0.2);">
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                    <span><i class="fas fa-tractor" style="color: var(--gold-main);"></i> Farmer-first approach</span>
+                    <span><i class="fas fa-chalkboard-user" style="color: var(--gold-main);"></i> Technical & digital literacy</span>
+                    <span><i class="fas fa-hand-holding-usd" style="color: var(--gold-main);"></i> Fair trade & ethical sourcing</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- Footer (matches previous design with green/gold & consistent info) -->
+<!-- Footer -->
 <footer class="footer">
     <div class="container">
         <div class="footer-inner">
             <div class="footer-col">
                 <h4>DTI–CARP Connect</h4>
-                <a href="#">Home</a>
-                <a href="#">About Us</a>
-                <a href="#">Products Directory</a>
+                <a href="<?= base_url('/') ?>">Home</a>
+                <a href="<?= base_url('aboutus') ?>">About Us</a>
+                <a href="<?= base_url('shops') ?>">Products Directory</a>
                 <a href="#">Partner with us</a>
-                <a href="#">Log In / Sign Up</a>
+                <a href="<?= base_url('admin/login') ?>">Log In</a>
             </div>
             <div class="footer-col">
                 <h4>Discover Aurora</h4>
@@ -417,5 +597,6 @@
         </div>
     </div>
 </footer>
+
 </body>
 </html>
