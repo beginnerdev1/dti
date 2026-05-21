@@ -80,7 +80,7 @@
         /* HERO CONTENT */
         .hero-content { text-align: center; max-width: 640px; margin: 0 auto; min-height: 260px; }
         .shop-avatar {
-            width: 100px; height: 100px; border-radius: 30px;
+            width: 200px; height: 200px; border-radius: 30px;
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 1rem;
             background: var(--gold-main); color: #06281C; font-size: 3rem;
@@ -287,6 +287,17 @@
             font-size: 0.9rem;
             margin-bottom: 0.5rem;
         }
+        .modal-contact {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--green-soft);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+        .modal-contact i {
+            color: var(--gold-main);
+        }
 
         .modal-footer {
             border-top: 1px solid #F0EAD6;
@@ -354,8 +365,9 @@
     <div class="container">
         <div class="nav">
             <div class="logo">
+                 <img src="<?= base_url('images/DTI-LOGO.png') ?>" alt="DTI Logo" onerror="this.style.display='none'">
                 <img src="<?= base_url('images/DTI-CARP_Logo-removebg-preview.png') ?>" alt="CARP Logo" onerror="this.style.display='none'">
-                <img src="<?= base_url('images/DTI-LOGO.png') ?>" alt="DTI Logo" onerror="this.style.display='none'">
+
             </div>
             <div class="nav-links">
                 <a href="<?= base_url('/') ?>">Home</a>
@@ -394,6 +406,10 @@
             <div class="modal-category">
                 <i class="fas fa-tag"></i>
                 <span id="modalProductCategory"></span>
+            </div>
+            <!-- Shop contact number inside modal -->
+            <div class="modal-contact" id="modalShopContact" style="display:none;">
+                <i class="fas fa-phone-alt"></i>Contact us: <span></span>
             </div>
         </div>
         <div class="modal-footer">
@@ -477,6 +493,9 @@ function imgOrFallback(image, name, fallback) {
 // ── Render shop hero ──────────────────────────────────────────────────────────
 
 function renderShop(shop) {
+    // Save shop data globally so we can access its contact number later
+    window.currentShop = shop;
+
     document.title = shop.name + ' | Shop Brochure';
 
     const avatarHTML = shop.image
@@ -607,6 +626,17 @@ function openProductModal(product) {
     document.getElementById('modalProductPrice').textContent    = formatPrice(product.price);
     document.getElementById('modalProductDesc').textContent     = product.description || 'No description available.';
     document.getElementById('modalProductCategory').textContent = product.category || '—';
+
+    // Show/hide shop contact number inside modal
+    const contactDiv = document.getElementById('modalShopContact');
+    const contactSpan = contactDiv.querySelector('span');
+    if (window.currentShop && window.currentShop.contact_number) {
+        contactSpan.textContent = window.currentShop.contact_number;
+        contactDiv.style.display = 'flex';
+    } else {
+        contactDiv.style.display = 'none';
+    }
+
     modal.classList.add('active');
 }
 
